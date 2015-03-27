@@ -1,0 +1,23 @@
+#left_column {
+	float: left;
+	width: 90%;
+}
+
+#right_column {
+	float: right;
+	width: 10%;
+}
+
+#spacer {
+
+	margin-bottom: 5em;
+	font-style: oblique;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+#spacer1 {
+
+	font-size: 18px;
+	font-weight: normal;
+}

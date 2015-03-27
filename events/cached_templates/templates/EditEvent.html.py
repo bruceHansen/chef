@@ -4,9 +4,9 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1423359334.848242
+_modified_time = 1427487919.178021
 _enable_loop = True
-_template_filename = '/Users/John/DevProjects/Repositories/chef/events/templates/EditEvent.html'
+_template_filename = 'C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\events\\templates/EditEvent.html'
 _template_uri = 'EditEvent.html'
 _source_encoding = 'ascii'
 import os, os.path, re
@@ -28,16 +28,16 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        form = context.get('form', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
         def tab_title():
             return render_tab_title(context._locals(__M_locals))
         def extra_links():
             return render_extra_links(context._locals(__M_locals))
-        form = context.get('form', UNDEFINED)
         def paper_elements_import():
             return render_paper_elements_import(context._locals(__M_locals))
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\n\n')
@@ -105,8 +105,11 @@ def render_extra_links(context,**pageargs):
     try:
         def extra_links():
             return render_extra_links(context)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         __M_writer = context.writer()
-        __M_writer('\n  \t<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> \n\t<script src="http://code.jquery.com/jquery-1.9.1.js"></script>\n\t<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>\n')
+        __M_writer('\n  \t<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> \n\t<script src="http://code.jquery.com/jquery-1.9.1.js"></script>\n\t<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>\n\t<link rel="stylesheet" type="text/css" href="')
+        __M_writer(str( STATIC_URL ))
+        __M_writer('base_admin/styles/Edit.css">\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -115,9 +118,9 @@ def render_extra_links(context,**pageargs):
 def render_paper_elements_import(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def paper_elements_import():
             return render_paper_elements_import(context)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\t<link rel="import" href="')
         __M_writer(str( STATIC_URL ))
@@ -135,6 +138,6 @@ def render_paper_elements_import(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"128": 18, "129": 19, "130": 19, "68": 29, "136": 130, "75": 29, "76": 36, "77": 39, "78": 42, "79": 42, "80": 42, "81": 44, "82": 47, "83": 50, "84": 52, "85": 56, "91": 11, "122": 15, "97": 11, "27": 0, "103": 23, "42": 7, "43": 9, "109": 23, "48": 13, "115": 15, "53": 20, "58": 27, "123": 16, "124": 16, "125": 17, "126": 17, "127": 18}, "filename": "/Users/John/DevProjects/Repositories/chef/events/templates/EditEvent.html", "uri": "EditEvent.html", "source_encoding": "ascii"}
+{"filename": "C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\events\\templates/EditEvent.html", "line_map": {"128": 17, "129": 17, "130": 18, "131": 18, "68": 30, "133": 19, "75": 30, "76": 37, "77": 40, "78": 43, "79": 43, "80": 43, "81": 45, "82": 48, "83": 51, "84": 53, "85": 57, "132": 19, "91": 11, "97": 11, "27": 0, "139": 133, "103": 23, "112": 27, "42": 7, "43": 9, "110": 23, "111": 27, "48": 13, "53": 20, "118": 15, "58": 28, "125": 15, "126": 16, "127": 16}, "uri": "EditEvent.html", "source_encoding": "ascii"}
 __M_END_METADATA
 """

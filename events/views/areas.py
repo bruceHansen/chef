@@ -98,6 +98,37 @@ def process_request(request):
 	return templater.render_to_response(request, 'areas.html', params)
 
 ##########################################################################################
+################################# GUEST VIEW AREA ########################################
+##########################################################################################
+
+@view_function
+def area_user(request):
+	
+	# Define the view bag
+	params = {}
+
+	# Delete all areas that exist in the database with names that are blank
+	# (when someone starts an event and abandons it)
+	areas = hmod.Area.objects.filter(name='').delete()
+
+	# Grab all the areas from the database related to the event that you're editing
+	areas = hmod.Area.objects.filter(event_id=request.urlparams[0]).order_by('place_number')
+
+	# Grab event to pass in
+	try:
+		event = hmod.Event.objects.get(id=request.urlparams[0])
+	except Event.DoesNotExist:
+		return HttpResponseRedirect('/events/events')
+
+	params['event'] = event
+
+	# Add areas to the view bag
+	params['areas'] = areas
+
+	return templater.render_to_response(request, 'area_user.html', params)
+
+
+##########################################################################################
 ###################################### EDIT ACTION #######################################
 ##########################################################################################
 

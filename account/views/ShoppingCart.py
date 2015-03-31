@@ -172,12 +172,43 @@ class PaymentForm(CustomForm):
 	submit_text = 'Continue'
 
 	## Form Inputs ##
+	name = forms.CharField(required=True, max_length=100)
 	credit_card_number = forms.CharField(required=True, max_length=100)
 	security_code = forms.IntegerField(required=True)
-	expiration_month = forms.CharField(required=True, max_length=2)
-	expiration_year = forms.CharField(required=True, max_length=4)
-	ZIP = forms.CharField(required=True)
+	exp_month = forms.CharField(required=True, max_length=2)
+	exp_year = forms.CharField(required=True, max_length=4)
+	card_company = forms.CharField(max_length=100)
 
+	def clean(self):
+
+		API_URL = 'http://dithers.cs.byu.edu/iscore/api/v1/charges'
+		API_KEY = 'cd0bea8de66c6bdd2ba2a87301a705d9'
+
+		r= requests.post(API_URL, data = {
+			 'apiKey': API_KEY, 
+			 'currency': 'usd', 
+			 'amount': self.request.urlparams[0], 
+			 'type': self.cleaned_data['card_company'],
+			 'number': self.cleaned_data['credit_card_number'],
+			 'exp_month': self.cleaned_data['exp_month'], 
+			 'exp_year': self.cleaned_data['exp_year'], 
+			 'cvc': self.cleaned_data['security_code'], 
+			 'name': self.cleaned_data['name'], 
+			 'description': 'Charge for cosmo@is411.byu.edu',
+		})
+
+		print(r.text)
+
+		# parse response to a dictionary
+		resp = r.json()
+		if 'error' in resp: # error?
+			raise forms.ValidationError("ERROR: " + resp['error'])
+
+		else:
+			print(resp.keys())
+			print(resp['ID'])
+
+		return self.cleaned_data
 ##########################################################################################
 ################################# DEFAULT ACTION #########################################
 ##########################################################################################
@@ -306,38 +337,9 @@ def checkout(request):
 		if form.is_valid():
 
 			# Return user to list
-			return HttpResponseRedirect('/account/ShoppingCart.payment/')
+			return HttpResponseRedirect('/account/ShoppingCart.payment/' + request.urlparams[0])
 
 	params['form'] = form
-
-	API_URL = 'http://dithers.cs.byu.edu/iscore/api/v1/charges'
-	API_KEY = 'cd0bea8de66c6bdd2ba2a87301a705d9'
-
-	r= requests.post(API_URL, data = {
-		'apiKey': API_KEY, 
-		 'currency': 'usd', 
-		 'amount': '5.99', 
-		 'type': 'Visa', 
-		 'number': '4732817300654', 
-		 'exp_month': '10', 
-		 'exp_year': '15', 
-		 'cvc': '411', 
-		 'name': 'Cosmo Limesandal', 
-		 'description': 'Charge for cosmo@is411.byu.edu',
-	})
-
-	print(r.text)
-
-	# parse response to a dictionary
-	resp = r.json()
-	if 'error' in resp: # error?
-		print("ERROR: ", resp['error'])
-
-	else:
-		print(resp.keys())
-		print(resp['ID'])
-	
-
 
 	return templater.render_to_response(request, 'ShippingInfo.html', params)
 

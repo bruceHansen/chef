@@ -20,4 +20,11 @@
 
 	font-size: 18px;
 	font-weight: normal;
+	margin-bottom: 5px;
+}
+
+#photo {
+
+	max-width: 275px;
+	max-height: auto;
 }

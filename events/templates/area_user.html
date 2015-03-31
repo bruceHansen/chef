@@ -118,29 +118,50 @@
 
 		<div id="spacer">
 			${ area.name }
-			<div id="spacer1">
-				Products for Sale: 
-				%for item in areas[area]:
-				<div>
-					<img src="${ STATIC_URL }${ item.related_image }" >
-				</div>
-				%endfor
+			<div>
+			Area Number: 
 			</div>
+				${ area.place_number }
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>
+							Name
+						</th>
+						<th>
+							Price
+						</th>
+						<th>
+							Photo
+						</th>
+					</tr>
+				</thead>
 
+				%for item in areas[area]:
+				<tbody>
+					<tr>
+						<td>
+							${ item.product.name }
+						</td>
+						<td>
+							${ item.product.price }
+						</td>
+						<td>
+
+						</td>
+						<td>
+							<img id="photo" src="${ STATIC_URL }${ item.related_image }" >
+						</td>
+					</tr>
+				</tbody>
+				%endfor
+
+			</table>
 		</div>
 		%endfor
 	</div>
 
-	<div id="right_column">
-		<h2>Place Number</h2>
 
-		%for area in areas:
-
-		<div id="spacer">
-			${ area.place_number }
-		</div>
-		%endfor
-	</div>
 
 	## SPACER DIVS ##
 	<div class="spacer"></div>

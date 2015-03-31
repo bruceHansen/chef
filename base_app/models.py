@@ -207,24 +207,6 @@ class Area(models.Model):
         return self.name
 
 #########################################################################################
-################################## EXPECTED SALE ITEM ###################################
-#########################################################################################
-
-# Expected Sale Items are items that are possibly going to be sold in a given area for a 
-# given event. They are purely informational, therefore they do not need to be tied to 
-# the inventory.
-
-class ExpectedSaleItem(models.Model):
-    name        = models.TextField(max_length=100)
-    description = models.TextField(max_length=1000)
-    low_price   = models.DecimalField(max_digits=10, decimal_places=2)
-    high_price  = models.DecimalField(max_digits=10, decimal_places=2)
-    area        = models.ForeignKey(Area) 
-
-    def __str__(self):
-        return self.name
-
-#########################################################################################
 ####################################### CATEGORY ########################################
 #########################################################################################
 
@@ -260,6 +242,22 @@ class ProductSpecification(models.Model):
 
     def __str__(self):
         return self.name
+
+#########################################################################################
+################################## EXPECTED SALE ITEM ###################################
+#########################################################################################
+
+# Expected Sale Items are items that are possibly going to be sold in a given area for a 
+# given event. They are purely informational, therefore they do not need to be tied to 
+# the inventory.
+
+class ExpectedSaleItem(models.Model):
+    name        = models.TextField(max_length=100, null=True)
+    description = models.TextField(max_length=1000, null=True)
+    area        = models.ForeignKey(Area) 
+    product     = models.ForeignKey(ProductSpecification)
+    related_image = models.ImageField()
+
 
 #########################################################################################
 ###################################### INVENTORY ########################################

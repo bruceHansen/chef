@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1426908681.552551
+_modified_time = 1427319341.002127
 _enable_loop = True
-_template_filename = '/Users/John/DevProjects/Repositories/chef/products/templates/ItemDetails.html'
+_template_filename = 'C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\products\\templates/ItemDetails.html'
 _template_uri = 'ItemDetails.html'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['tab_title', 'page_title', 'content']
+_exports = ['content', 'page_title', 'tab_title']
 
 
 def _mako_get_namespace(context, name):
@@ -28,14 +28,14 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        def tab_title():
-            return render_tab_title(context._locals(__M_locals))
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        item = context.get('item', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
         def page_title():
             return render_page_title(context._locals(__M_locals))
-        item = context.get('item', UNDEFINED)
+        def tab_title():
+            return render_tab_title(context._locals(__M_locals))
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\n\n')
@@ -53,49 +53,15 @@ def render_body(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_tab_title(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def tab_title():
-            return render_tab_title(context)
-        item = context.get('item', UNDEFINED)
-        __M_writer = context.writer()
-        __M_writer('\n  ')
-        __M_writer(str( item.specs.name ))
-        __M_writer('\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_page_title(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def page_title():
-            return render_page_title(context)
-        item = context.get('item', UNDEFINED)
-        __M_writer = context.writer()
-        __M_writer('\n\t\t<div class="row">\n\t\t\t\n')
-        __M_writer('\t\t\t<div class="col-md-8">\n\t\t\t\t<h1>')
-        __M_writer(str( item.specs.name ))
-        __M_writer('</h1>\n\t\t\t</div>\n')
-        __M_writer('\n')
-        __M_writer('\t\t\t<div class="col-md-4">\n\t\t\t\t\n\t\t\t</div>\n')
-        __M_writer('\n\t\t</div>\n\t')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def content():
             return render_content(context)
+        item = context.get('item', UNDEFINED)
         def page_title():
             return render_page_title(context)
-        item = context.get('item', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\t')
@@ -139,8 +105,42 @@ def render_content(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_page_title(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        item = context.get('item', UNDEFINED)
+        def page_title():
+            return render_page_title(context)
+        __M_writer = context.writer()
+        __M_writer('\n\t\t<div class="row">\n\t\t\t\n')
+        __M_writer('\t\t\t<div class="col-md-8">\n\t\t\t\t<h1>')
+        __M_writer(str( item.specs.name ))
+        __M_writer('</h1>\n\t\t\t</div>\n')
+        __M_writer('\n')
+        __M_writer('\t\t\t<div class="col-md-4">\n\t\t\t\t\n\t\t\t</div>\n')
+        __M_writer('\n\t\t</div>\n\t')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
+def render_tab_title(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        item = context.get('item', UNDEFINED)
+        def tab_title():
+            return render_tab_title(context)
+        __M_writer = context.writer()
+        __M_writer('\n  ')
+        __M_writer(str( item.specs.name ))
+        __M_writer('\n')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 """
 __M_BEGIN_METADATA
-{"filename": "/Users/John/DevProjects/Repositories/chef/products/templates/ItemDetails.html", "uri": "ItemDetails.html", "source_encoding": "ascii", "line_map": {"128": 80, "129": 82, "130": 82, "131": 82, "132": 84, "133": 87, "134": 90, "135": 93, "136": 97, "142": 136, "27": 0, "40": 7, "41": 9, "46": 13, "56": 11, "63": 11, "64": 12, "65": 12, "71": 18, "78": 18, "79": 22, "80": 23, "81": 23, "82": 26, "83": 28, "84": 32, "90": 15, "100": 15, "101": 18, "106": 34, "107": 36, "108": 38, "109": 41, "110": 44, "111": 44, "112": 44, "113": 44, "114": 46, "115": 49, "116": 51, "117": 54, "118": 55, "119": 55, "120": 58, "121": 62, "122": 63, "123": 63, "124": 66, "125": 69, "126": 71, "127": 74}}
+{"filename": "C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\products\\templates/ItemDetails.html", "source_encoding": "ascii", "uri": "ItemDetails.html", "line_map": {"134": 11, "135": 12, "136": 12, "142": 136, "27": 0, "40": 7, "41": 9, "46": 13, "56": 15, "66": 15, "67": 18, "72": 34, "73": 36, "74": 38, "75": 41, "76": 44, "77": 44, "78": 44, "79": 44, "80": 46, "81": 49, "82": 51, "83": 54, "84": 55, "85": 55, "86": 58, "87": 62, "88": 63, "89": 63, "90": 66, "91": 69, "92": 71, "93": 74, "94": 80, "95": 82, "96": 82, "97": 82, "98": 84, "99": 87, "100": 90, "101": 93, "102": 97, "108": 18, "115": 18, "116": 22, "117": 23, "118": 23, "119": 26, "120": 28, "121": 32, "127": 11}}
 __M_END_METADATA
 """

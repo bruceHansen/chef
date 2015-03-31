@@ -73,9 +73,39 @@ address.state   = 'UT'
 address.ZIP     = '84606'
 address.save() 
 
-user           = mod.User.objects.create_superuser( username='admin', email='test@fake.com', password='password' )
+user = mod.User.objects.create_superuser( username='admin', email='test@fake.com', password='password' )
 user.first_name= 'Admin'
 user.address   = address
+user.save()
+
+group.user_set.add(user)
+
+#new user
+addrf = mod.Address(id=1)
+
+user = mod.User.objects.create_user( username='Bruce', email='bruce@gmail.com', password='password' )
+user.first_name = 'Bruce'
+user.last_name = 'Hansen'
+user.email = 'brucehnsn@gmail.com'
+user.phone = '3857438966'
+user.security_question = 'What is your favorite food?'
+user.security_answer = 'Potatoes'
+user.address = addrf
+user.save()
+
+group.user_set.add(user)
+
+#new user
+addrf = mod.Address(id=1)
+
+user = mod.User.objects.create_user( username='Derik', email='Derikknowswhatsup@gmail.com', password='password' )
+user.first_name = 'Derik'
+user.last_name = 'Hasvold'
+user.email = 'Derikknowswhatsup@gmail.com'
+user.phone = '2124569873'
+user.security_question = 'Why are you so smart?'
+user.security_answer = 'Potatoes'
+user.address = addrf
 user.save()
 
 group.user_set.add(user)
@@ -118,6 +148,15 @@ address.ZIP = '84606'
 
 address.save()
 
+address = mod.Address()
+address.address1 = '120 Park Lane'
+address.address2 = 'Nowhere'
+address.city = 'Orem'
+address.state = 'UT'
+address.ZIP = '84605'
+
+address.save()
+
 # Add a couple of guests
 for data in [
 	{'first_name':'Joseph', 'last_name':'Townson', 'email':'fake@fake.com', 'address':address, 'phone':'7134088245', 'security_question':'What is your name?', 'security_answer':'Joseph', 'username':'jobro1', },
@@ -131,12 +170,179 @@ for data in [
 		setattr(user, key, data[key])
 
 	user.set_password('password')
-
+	
 	user.save()
+
+	group.user_set.add(user)
 
 #############################################################################
 ################################ DUMMY DATA #################################
 #############################################################################
+
+################################## VENUE ####################################
+
+addressf = mod.Address(id=1)
+addressf1 = mod.Address(id=2)
+
+v = mod.Venue()
+v.name = "Woodstock"
+v.address = addressf
+v.save()
+
+v = mod.Venue()
+v.name = "Scera Park"
+v.address = addressf1
+v.save()
+
+
+################################# EVENT #####################################
+
+mod.Event.objects.all().delete()
+venuef = mod.Venue(id=1)
+venuef1 = mod.Venue(id=2)
+
+e = mod.Event()
+e.name = "Colonial Heritage Festival"
+e.start_date = '2015-06-15'
+e.end_date = '2015-06-17'
+e.event_map = 'Event.doc'
+e.venue = venuef1
+e.save()
+
+e = mod.Event()
+e.name = "Gettysburg Visiting Tour"
+e.start_date = '2015-08-10'
+e.end_date = '2015-08-13'
+e.event_map = 'Event.doc'
+e.venue = venuef
+e.save()
+
+e = mod.Event()
+e.name = "Colonial Museum History Event"
+e.start_date = '2015-10-18'
+e.end_date = '2015-10-22'
+e.event_map = 'Event.doc'
+e.venue = venuef1
+e.save()
+
+
+################################# AREA #####################################
+
+mod.Area.objects.all().delete()
+userf = mod.User(id=2)
+userf1 = mod.User(id=3)
+colonial = mod.Event(id=1)
+gettysburg = mod.Event(id=2)
+museum = mod.Event(id=3)
+
+
+a = mod.Area()
+a.name = "Bread Making"
+a.description = "Colonial Bread Makers make whole-wheat bread"
+a.place_number = 1
+a.coordinator = userf
+a.supervisor = userf
+a.event = colonial
+a.save()
+
+a = mod.Area()
+a.name = "Security - Colonial"
+a.description = "Administrative"
+a.place_number = 2
+a.coordinator = userf1
+a.supervisor = userf1
+a.event = colonial
+a.save()
+
+a = mod.Area()
+a.name = "Information Booth"
+a.description = "An information booth to help visitors with finding areas within the event"
+a.place_number = 3
+a.coordinator = userf1
+a.supervisor = userf1
+a.event = colonial
+a.save()
+
+a = mod.Area()
+a.name = "Bakehouse - Colonial"
+a.description = "Exhibit"
+a.place_number = 4
+a.coordinator = userf
+a.supervisor = userf
+a.event = colonial
+a.save()
+
+a = mod.Area()
+a.name = "Cooperage"
+a.description = "Exhibit"
+a.place_number = 5
+a.coordinator = userf
+a.supervisor = userf
+a.event = colonial
+a.save()
+
+a = mod.Area()
+a.name = "Olde South Church"
+a.description = "Exhibit"
+a.place_number = 1
+a.coordinator = userf
+a.supervisor = userf
+a.event = gettysburg
+a.save()
+
+a = mod.Area()
+a.name = "Jamestown Exhibit"
+a.description = "Exhibit"
+a.place_number = 2
+a.coordinator = userf
+a.supervisor = userf
+a.event = gettysburg
+a.save()
+
+a = mod.Area()
+a.name = "Security - Gettysburg"
+a.description = "Administrative"
+a.place_number = 3
+a.coordinator = userf1
+a.supervisor = userf1
+a.event = gettysburg
+a.save()
+
+a = mod.Area()
+a.name = "Bakehouse - Gettysburg"
+a.description = "Exhibit"
+a.place_number = 4
+a.coordinator = userf
+a.supervisor = userf
+a.event = gettysburg
+a.save()
+
+a = mod.Area()
+a.name = "Security - Museum"
+a.description = "Administrative"
+a.place_number = 1
+a.coordinator = userf1
+a.supervisor = userf1
+a.event = museum
+a.save()
+
+a = mod.Area()
+a.name = "Revolutionary War"
+a.description = "Administrative"
+a.place_number = 2
+a.coordinator = userf1
+a.supervisor = userf1
+a.event = museum
+a.save()
+
+a = mod.Area()
+a.name = "Benjamin Franklin Stories"
+a.description = "Administrative"
+a.place_number = 3
+a.coordinator = userf1
+a.supervisor = userf1
+a.event = museum
+a.save()
 
 ################################ INVENTORY ##################################
 
@@ -148,6 +354,7 @@ photo.description  = "Musket balls for sale!"
 photo.photographer = user
 
 photo.save()
+
 
 specs                 = mod.ProductSpecification()
 specs.name            = 'Musket Balls'
@@ -170,6 +377,7 @@ inventory.condition        = 'Old'
 inventory.specs            = specs
 
 inventory.save()
+
 
 ############################ SERIALIZED PRODUCT #############################
 
@@ -365,7 +573,6 @@ wardrobe_item.save()
 for data in [
 
 	{'customer': user}
-
 ]:
 
 	transaction = mod.Transaction()
@@ -393,3 +600,23 @@ for data in [
 		setattr(rental, key, data[key])
 
 	rental.save()
+
+################################# EXPECTED SALE ITEM #####################################
+
+si = mod.ExpectedSaleItem()
+
+si.area = mod.Area.objects.get(name='Bread Making')
+si.product = mod.ProductSpecification.objects.get(name='Broom')
+si.related_image = "events/media/broom.jpg"
+
+si.save()
+
+si = mod.ExpectedSaleItem()
+
+si.area = mod.Area.objects.get(name='Bread Making')
+si.product = mod.ProductSpecification.objects.get(name='Musket Balls')
+si.related_image = "events/media/musket_balls.jpg"
+
+si.save()
+
+

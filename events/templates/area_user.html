@@ -119,13 +119,16 @@
 		<div id="spacer">
 			${ area.name }
 			<div id="spacer1">
-				Products for Sale:
+				Products for Sale: 
+				%for item in areas[area]:
+				<div>
+					<img src="${ STATIC_URL }${ item.related_image }" >
+				</div>
+				%endfor
 			</div>
+
 		</div>
 		%endfor
-
-
-
 	</div>
 
 	<div id="right_column">

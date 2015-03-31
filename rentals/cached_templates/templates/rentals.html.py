@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1426904638.070237
+_modified_time = 1427323872.335832
 _enable_loop = True
-_template_filename = '/Users/John/DevProjects/Repositories/chef/rentals/templates/rentals.html'
+_template_filename = 'C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rentals.html'
 _template_uri = 'rentals.html'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['content', 'tab_title', 'page_title']
+_exports = ['content', 'page_title', 'tab_title']
 
 
 def _mako_get_namespace(context, name):
@@ -28,12 +28,12 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
         non_wardrobe = context.get('non_wardrobe', UNDEFINED)
         def tab_title():
             return render_tab_title(context._locals(__M_locals))
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def page_title():
             return render_page_title(context._locals(__M_locals))
         wardrobe = context.get('wardrobe', UNDEFINED)
@@ -57,12 +57,12 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def content():
             return render_content(context)
-        non_wardrobe = context.get('non_wardrobe', UNDEFINED)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def page_title():
             return render_page_title(context)
+        non_wardrobe = context.get('non_wardrobe', UNDEFINED)
         wardrobe = context.get('wardrobe', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\t\n')
@@ -122,18 +122,6 @@ def render_content(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_tab_title(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def tab_title():
-            return render_tab_title(context)
-        __M_writer = context.writer()
-        __M_writer('\n  \tRentals\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 def render_page_title(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
@@ -150,8 +138,20 @@ def render_page_title(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_tab_title(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def tab_title():
+            return render_tab_title(context)
+        __M_writer = context.writer()
+        __M_writer('\n  \tRentals\n')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 """
 __M_BEGIN_METADATA
-{"line_map": {"131": 11, "137": 18, "143": 18, "144": 22, "145": 26, "146": 28, "147": 32, "153": 147, "27": 0, "41": 7, "42": 9, "47": 13, "57": 15, "68": 15, "69": 18, "74": 34, "75": 36, "76": 38, "77": 40, "78": 42, "79": 43, "80": 47, "81": 47, "82": 47, "83": 47, "84": 47, "85": 49, "86": 53, "87": 53, "88": 53, "89": 53, "90": 53, "91": 53, "92": 55, "93": 60, "94": 62, "95": 64, "96": 66, "97": 68, "98": 70, "99": 72, "100": 74, "101": 75, "102": 79, "103": 79, "104": 79, "105": 79, "106": 79, "107": 81, "108": 85, "109": 85, "110": 85, "111": 85, "112": 85, "113": 85, "114": 87, "115": 92, "116": 94, "117": 96, "118": 98, "119": 102, "125": 11}, "uri": "rentals.html", "source_encoding": "ascii", "filename": "/Users/John/DevProjects/Repositories/chef/rentals/templates/rentals.html"}
+{"filename": "C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rentals.html", "source_encoding": "ascii", "uri": "rentals.html", "line_map": {"131": 18, "132": 22, "133": 26, "134": 28, "135": 32, "141": 11, "147": 11, "153": 147, "27": 0, "41": 7, "42": 9, "47": 13, "57": 15, "68": 15, "69": 18, "74": 34, "75": 36, "76": 38, "77": 40, "78": 42, "79": 43, "80": 47, "81": 47, "82": 47, "83": 47, "84": 47, "85": 49, "86": 53, "87": 53, "88": 53, "89": 53, "90": 53, "91": 53, "92": 55, "93": 60, "94": 62, "95": 64, "96": 66, "97": 68, "98": 70, "99": 72, "100": 74, "101": 75, "102": 79, "103": 79, "104": 79, "105": 79, "106": 79, "107": 81, "108": 85, "109": 85, "110": 85, "111": 85, "112": 85, "113": 85, "114": 87, "115": 92, "116": 94, "117": 96, "118": 98, "119": 102, "125": 18}}
 __M_END_METADATA
 """

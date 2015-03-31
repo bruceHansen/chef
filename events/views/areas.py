@@ -112,13 +112,26 @@ def area_user(request):
 	areas = hmod.Area.objects.filter(name='').delete()
 
 	# Grab all the areas from the database related to the event that you're editing
-	areas = hmod.Area.objects.filter(event_id=request.urlparams[0]).order_by('place_number')
+	allareas = hmod.Area.objects.filter(event_id=request.urlparams[0]).order_by('place_number') 
+
+	areas = {}
+	for area in allareas:
+		try:
+			items = hmod.ExpectedSaleItem.objects.filter(area=area)
+		except hmod.ExpectedSaleItem.DoesNotExist:
+				return HttpResponseRedirect('/events/events')
+
+		areas[area] = items
+
+		print(areas)
+
 
 	# Grab event to pass in
 	try:
 		event = hmod.Event.objects.get(id=request.urlparams[0])
 	except Event.DoesNotExist:
 		return HttpResponseRedirect('/events/events')
+
 
 	params['event'] = event
 

@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1425797409.423593
+_modified_time = 1427677432.423457
 _enable_loop = True
-_template_filename = '/Users/John/DevProjects/Repositories/chef/account/templates/confirmation.html'
+_template_filename = 'C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\account\\templates/confirmation.html'
 _template_uri = 'confirmation.html'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['tab_title', 'content', 'page_title']
+_exports = ['page_title', 'content', 'tab_title']
 
 
 def _mako_get_namespace(context, name):
@@ -28,12 +28,12 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        def tab_title():
-            return render_tab_title(context._locals(__M_locals))
-        def content():
-            return render_content(context._locals(__M_locals))
         def page_title():
             return render_page_title(context._locals(__M_locals))
+        def content():
+            return render_content(context._locals(__M_locals))
+        def tab_title():
+            return render_tab_title(context._locals(__M_locals))
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\n\n')
@@ -51,13 +51,15 @@ def render_body(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_tab_title(context,**pageargs):
+def render_page_title(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        def tab_title():
-            return render_tab_title(context)
+        def page_title():
+            return render_page_title(context)
         __M_writer = context.writer()
-        __M_writer('\n  \tOrder Confirmation\n')
+        __M_writer('\n\t\t<div class="row">\n\t\t\t\n')
+        __M_writer('\t\t\t<div class="col-md-8">\n\t\t\t\t<h1>Congratulations!</h1>\n\t\t\t</div>\n')
+        __M_writer('\n\t\t</div>\n\t')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -66,10 +68,10 @@ def render_tab_title(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        def content():
-            return render_content(context)
         def page_title():
             return render_page_title(context)
+        def content():
+            return render_content(context)
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\t')
@@ -90,15 +92,13 @@ def render_content(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_page_title(context,**pageargs):
+def render_tab_title(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        def page_title():
-            return render_page_title(context)
+        def tab_title():
+            return render_tab_title(context)
         __M_writer = context.writer()
-        __M_writer('\n\t\t<div class="row">\n\t\t\t\n')
-        __M_writer('\t\t\t<div class="col-md-8">\n\t\t\t\t<h1>Congratulations!</h1>\n\t\t\t</div>\n')
-        __M_writer('\n\t\t</div>\n\t')
+        __M_writer('\n  \tOrder Confirmation\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -106,6 +106,6 @@ def render_page_title(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"source_encoding": "ascii", "filename": "/Users/John/DevProjects/Repositories/chef/account/templates/confirmation.html", "uri": "confirmation.html", "line_map": {"66": 15, "74": 15, "75": 18, "80": 28, "81": 30, "82": 32, "83": 35, "84": 43, "85": 46, "86": 49, "87": 53, "27": 0, "93": 18, "99": 18, "100": 22, "101": 26, "38": 7, "39": 9, "107": 101, "44": 13, "54": 11, "60": 11}}
+{"uri": "confirmation.html", "source_encoding": "ascii", "line_map": {"68": 15, "76": 15, "77": 18, "82": 28, "83": 30, "84": 32, "85": 35, "86": 43, "87": 46, "88": 49, "89": 53, "27": 0, "95": 11, "101": 11, "38": 7, "39": 9, "107": 101, "44": 13, "54": 18, "60": 18, "61": 22, "62": 26}, "filename": "C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\account\\templates/confirmation.html"}
 __M_END_METADATA
 """

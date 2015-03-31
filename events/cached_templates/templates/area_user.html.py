@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427492425.232706
+_modified_time = 1427680102.470922
 _enable_loop = True
 _template_filename = 'C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\events\\templates/area_user.html'
 _template_uri = 'area_user.html'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['paper_elements_import', 'tab_title', 'meta_tags', 'content', 'page_title', 'extra_links']
+_exports = ['meta_tags', 'page_title', 'content', 'paper_elements_import', 'extra_links', 'tab_title']
 
 
 def _mako_get_namespace(context, name):
@@ -28,21 +28,21 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        areas = context.get('areas', UNDEFINED)
+        event = context.get('event', UNDEFINED)
+        def meta_tags():
+            return render_meta_tags(context._locals(__M_locals))
+        def page_title():
+            return render_page_title(context._locals(__M_locals))
+        def content():
+            return render_content(context._locals(__M_locals))
         def tab_title():
             return render_tab_title(context._locals(__M_locals))
         def extra_links():
             return render_extra_links(context._locals(__M_locals))
-        def meta_tags():
-            return render_meta_tags(context._locals(__M_locals))
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
-        def page_title():
-            return render_page_title(context._locals(__M_locals))
+        areas = context.get('areas', UNDEFINED)
         def paper_elements_import():
             return render_paper_elements_import(context._locals(__M_locals))
-        def content():
-            return render_content(context._locals(__M_locals))
-        event = context.get('event', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n\r\n')
         __M_writer('\r\n\r\n')
@@ -75,40 +75,6 @@ def render_body(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_paper_elements_import(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
-        def paper_elements_import():
-            return render_paper_elements_import(context)
-        __M_writer = context.writer()
-        __M_writer('\r\n\t<link rel="import" href="')
-        __M_writer(str( STATIC_URL ))
-        __M_writer('base_app/styles/bower_components/paper-input/paper-input.html">\r\n\t<link rel="import" href="')
-        __M_writer(str( STATIC_URL ))
-        __M_writer('base_app/styles/bower_components/paper-button/paper-button.html">\r\n\t<link rel="import" href="')
-        __M_writer(str( STATIC_URL ))
-        __M_writer('base_app/styles/bower_components/paper-checkbox/paper-checkbox.html">\r\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_tab_title(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def tab_title():
-            return render_tab_title(context)
-        event = context.get('event', UNDEFINED)
-        __M_writer = context.writer()
-        __M_writer('\r\n  Areas for ')
-        __M_writer(str( event.name ))
-        __M_writer('\r\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 def render_meta_tags(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
@@ -121,15 +87,37 @@ def render_meta_tags(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_page_title(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        event = context.get('event', UNDEFINED)
+        def page_title():
+            return render_page_title(context)
+        __M_writer = context.writer()
+        __M_writer('\r\n\t\t<div class="row">\r\n\t\t\t\r\n')
+        __M_writer('\t\t\t<div class="col-md-8">\r\n\t\t\t\t<h1>Areas for ')
+        __M_writer(str( event.name ))
+        __M_writer('</h1>\r\n\t\t\t</div>\r\n')
+        __M_writer('\r\n')
+        __M_writer('\t\t\t<div class="col-md-4">\r\n\t\t\t\t<div class="create_button">\r\n\t\t\t\t\t<a class="button" href="/events/areas.create/')
+        __M_writer(str( event.id ))
+        __M_writer('">\r\n\t\t\t\t\t\t<paper-button class="create_button" raised>Create new Area</paper-button>\r\n\t\t\t\t\t</a>\r\n\t\t\t\t</div>\r\n\t\t\t\t\r\n\t\t\t</div>\r\n')
+        __M_writer('\r\n\t\t</div>\r\n\t')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        event = context.get('event', UNDEFINED)
         areas = context.get('areas', UNDEFINED)
-        def content():
-            return render_content(context)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def page_title():
             return render_page_title(context)
-        event = context.get('event', UNDEFINED)
+        def content():
+            return render_content(context)
         __M_writer = context.writer()
         __M_writer('\r\n\t\r\n')
         __M_writer('\t')
@@ -154,8 +142,14 @@ def render_content(context,**pageargs):
         for area in areas:
             __M_writer('\r\n\t\t<div id="spacer">\r\n\t\t\t')
             __M_writer(str( area.name ))
-            __M_writer('\r\n\t\t\t<div id="spacer1">\r\n\t\t\t\tProducts for Sale:\r\n\t\t\t</div>\r\n\t\t</div>\r\n')
-        __M_writer('\r\n\r\n\r\n\t</div>\r\n\r\n\t<div id="right_column">\r\n\t\t<h2>Place Number</h2>\r\n\r\n')
+            __M_writer('\r\n\t\t\t<div id="spacer1">\r\n\t\t\t\tProducts for Sale: \r\n')
+            for item in areas[area]:
+                __M_writer('\t\t\t\t<div>\r\n\t\t\t\t\t<img src="')
+                __M_writer(str( STATIC_URL ))
+                __M_writer(str( item.related_image ))
+                __M_writer('" >\r\n\t\t\t\t</div>\r\n')
+            __M_writer('\t\t\t</div>\r\n\r\n\t\t</div>\r\n')
+        __M_writer('\t</div>\r\n\r\n\t<div id="right_column">\r\n\t\t<h2>Place Number</h2>\r\n\r\n')
         for area in areas:
             __M_writer('\r\n\t\t<div id="spacer">\r\n\t\t\t')
             __M_writer(str( area.place_number ))
@@ -168,22 +162,20 @@ def render_content(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_page_title(context,**pageargs):
+def render_paper_elements_import(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        def page_title():
-            return render_page_title(context)
-        event = context.get('event', UNDEFINED)
+        def paper_elements_import():
+            return render_paper_elements_import(context)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         __M_writer = context.writer()
-        __M_writer('\r\n\t\t<div class="row">\r\n\t\t\t\r\n')
-        __M_writer('\t\t\t<div class="col-md-8">\r\n\t\t\t\t<h1>Areas for ')
-        __M_writer(str( event.name ))
-        __M_writer('</h1>\r\n\t\t\t</div>\r\n')
-        __M_writer('\r\n')
-        __M_writer('\t\t\t<div class="col-md-4">\r\n\t\t\t\t<div class="create_button">\r\n\t\t\t\t\t<a class="button" href="/events/areas.create/')
-        __M_writer(str( event.id ))
-        __M_writer('">\r\n\t\t\t\t\t\t<paper-button class="create_button" raised>Create new Area</paper-button>\r\n\t\t\t\t\t</a>\r\n\t\t\t\t</div>\r\n\t\t\t\t\r\n\t\t\t</div>\r\n')
-        __M_writer('\r\n\t\t</div>\r\n\t')
+        __M_writer('\r\n\t<link rel="import" href="')
+        __M_writer(str( STATIC_URL ))
+        __M_writer('base_app/styles/bower_components/paper-input/paper-input.html">\r\n\t<link rel="import" href="')
+        __M_writer(str( STATIC_URL ))
+        __M_writer('base_app/styles/bower_components/paper-button/paper-button.html">\r\n\t<link rel="import" href="')
+        __M_writer(str( STATIC_URL ))
+        __M_writer('base_app/styles/bower_components/paper-checkbox/paper-checkbox.html">\r\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -192,9 +184,9 @@ def render_page_title(context,**pageargs):
 def render_extra_links(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def extra_links():
             return render_extra_links(context)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n\t<link rel="stylesheet" type="text/css" href="')
         __M_writer(str( STATIC_URL ))
@@ -204,8 +196,23 @@ def render_extra_links(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_tab_title(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        event = context.get('event', UNDEFINED)
+        def tab_title():
+            return render_tab_title(context)
+        __M_writer = context.writer()
+        __M_writer('\r\n  Areas for ')
+        __M_writer(str( event.name ))
+        __M_writer('\r\n')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 """
 __M_BEGIN_METADATA
-{"filename": "C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\events\\templates/area_user.html", "line_map": {"134": 29, "135": 32, "140": 53, "141": 55, "142": 57, "143": 60, "144": 63, "145": 78, "146": 81, "147": 83, "148": 86, "149": 104, "150": 107, "151": 110, "152": 112, "153": 114, "154": 117, "27": 0, "156": 120, "157": 120, "158": 126, "159": 134, "160": 135, "161": 137, "162": 137, "155": 118, "164": 143, "165": 147, "171": 32, "47": 7, "48": 9, "178": 32, "179": 36, "180": 37, "53": 13, "182": 40, "183": 42, "184": 44, "185": 44, "58": 17, "63": 23, "192": 25, "181": 37, "68": 27, "199": 25, "200": 26, "201": 26, "78": 19, "207": 201, "163": 140, "85": 19, "86": 20, "87": 20, "88": 21, "89": 21, "90": 22, "91": 22, "186": 51, "97": 11, "104": 11, "105": 12, "106": 12, "112": 15, "118": 15, "124": 29}, "uri": "area_user.html", "source_encoding": "ascii"}
+{"filename": "C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\events\\templates/area_user.html", "uri": "area_user.html", "line_map": {"128": 53, "129": 55, "130": 57, "131": 60, "132": 63, "133": 78, "134": 81, "135": 83, "136": 86, "137": 104, "138": 107, "139": 110, "140": 112, "141": 114, "142": 117, "143": 118, "144": 120, "145": 120, "146": 123, "147": 124, "148": 125, "149": 125, "150": 125, "151": 128, "152": 132, "153": 137, "154": 138, "27": 0, "156": 140, "157": 143, "158": 146, "159": 150, "176": 21, "155": 140, "165": 19, "172": 19, "173": 20, "174": 20, "47": 7, "48": 9, "177": 22, "178": 22, "53": 13, "184": 25, "58": 17, "63": 23, "192": 26, "193": 26, "175": 21, "68": 27, "199": 11, "78": 15, "207": 12, "208": 12, "84": 15, "206": 11, "214": 208, "90": 32, "97": 32, "98": 36, "99": 37, "100": 37, "101": 40, "102": 42, "103": 44, "104": 44, "105": 51, "191": 25, "111": 29, "122": 29, "123": 32}, "source_encoding": "ascii"}
 __M_END_METADATA
 """

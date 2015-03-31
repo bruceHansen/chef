@@ -20,6 +20,7 @@ from django_mako_plus.controller.router import get_renderer
 from django.utils.translation import ugettext as _
 from base_app.CustomWidgets import CustomSelect, CustomRadioRenderer
 from django.contrib.auth import authenticate, login, logout
+import requests
 
 templater = get_renderer('account')
 
@@ -308,6 +309,35 @@ def checkout(request):
 			return HttpResponseRedirect('/account/ShoppingCart.payment/')
 
 	params['form'] = form
+
+	API_URL = 'http://dithers.cs.byu.edu/iscore/api/v1/charges'
+	API_KEY = 'cd0bea8de66c6bdd2ba2a87301a705d9'
+
+	r= requests.post(API_URL, data = {
+		'apiKey': API_KEY, 
+		 'currency': 'usd', 
+		 'amount': '5.99', 
+		 'type': 'Visa', 
+		 'number': '4732817300654', 
+		 'exp_month': '10', 
+		 'exp_year': '15', 
+		 'cvc': '411', 
+		 'name': 'Cosmo Limesandal', 
+		 'description': 'Charge for cosmo@is411.byu.edu',
+	})
+
+	print(r.text)
+
+	# parse response to a dictionary
+	resp = r.json()
+	if 'error' in resp: # error?
+		print("ERROR: ", resp['error'])
+
+	else:
+		print(resp.keys())
+		print(resp['ID'])
+	
+
 
 	return templater.render_to_response(request, 'ShippingInfo.html', params)
 

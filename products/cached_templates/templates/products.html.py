@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1426909061.545594
+_modified_time = 1427319334.833296
 _enable_loop = True
-_template_filename = '/Users/John/DevProjects/Repositories/chef/products/templates/products.html'
+_template_filename = 'C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\products\\templates/products.html'
 _template_uri = 'products.html'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['page_title', 'content', 'tab_title']
+_exports = ['content', 'page_title', 'tab_title']
 
 
 def _mako_get_namespace(context, name):
@@ -28,15 +28,15 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
-        bulk_items = context.get('bulk_items', UNDEFINED)
-        s_items = context.get('s_items', UNDEFINED)
         def tab_title():
             return render_tab_title(context._locals(__M_locals))
         def page_title():
             return render_page_title(context._locals(__M_locals))
+        bulk_items = context.get('bulk_items', UNDEFINED)
+        s_items = context.get('s_items', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\n\n')
@@ -54,32 +54,16 @@ def render_body(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_page_title(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def page_title():
-            return render_page_title(context)
-        __M_writer = context.writer()
-        __M_writer('\n\t\t<div class="row">\n\t\t\t\n')
-        __M_writer('\t\t\t<div class="col-md-8">\n\t\t\t\t<h1>View Items</h1>\n\t\t\t</div>\n')
-        __M_writer('\n')
-        __M_writer('\t\t\t<div class="col-md-4">\n\t\t\t\t<paper-button class="create_button search_button" raised>Search</paper-button>\n\t\t\t</div>\n')
-        __M_writer('\n\t\t</div>\n\t')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        def content():
+            return render_content(context)
+        bulk_items = context.get('bulk_items', UNDEFINED)
         def page_title():
             return render_page_title(context)
         s_items = context.get('s_items', UNDEFINED)
-        def content():
-            return render_content(context)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
-        bulk_items = context.get('bulk_items', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\t\n')
         __M_writer('\t')
@@ -138,6 +122,22 @@ def render_content(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_page_title(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def page_title():
+            return render_page_title(context)
+        __M_writer = context.writer()
+        __M_writer('\n\t\t<div class="row">\n\t\t\t\n')
+        __M_writer('\t\t\t<div class="col-md-8">\n\t\t\t\t<h1>View Items</h1>\n\t\t\t</div>\n')
+        __M_writer('\n')
+        __M_writer('\t\t\t<div class="col-md-4">\n\t\t\t\t<paper-button class="create_button search_button" raised>Search</paper-button>\n\t\t\t</div>\n')
+        __M_writer('\n\t\t</div>\n\t')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 def render_tab_title(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
@@ -152,6 +152,6 @@ def render_tab_title(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"uri": "products.html", "filename": "/Users/John/DevProjects/Repositories/chef/products/templates/products.html", "source_encoding": "ascii", "line_map": {"128": 89, "129": 89, "130": 91, "131": 96, "132": 98, "133": 100, "134": 102, "135": 106, "141": 11, "147": 11, "153": 147, "27": 0, "41": 7, "42": 9, "47": 13, "57": 18, "63": 18, "64": 22, "65": 26, "66": 28, "67": 32, "73": 15, "84": 15, "85": 18, "90": 34, "91": 36, "92": 38, "93": 40, "94": 42, "95": 43, "96": 47, "97": 47, "98": 47, "99": 47, "100": 47, "101": 49, "102": 55, "103": 55, "104": 55, "105": 55, "106": 55, "107": 55, "108": 57, "109": 62, "110": 64, "111": 66, "112": 68, "113": 70, "114": 72, "115": 74, "116": 76, "117": 77, "118": 81, "119": 81, "120": 81, "121": 81, "122": 81, "123": 83, "124": 89, "125": 89, "126": 89, "127": 89}}
+{"filename": "C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\products\\templates/products.html", "source_encoding": "ascii", "uri": "products.html", "line_map": {"131": 18, "132": 22, "133": 26, "134": 28, "135": 32, "141": 11, "147": 11, "153": 147, "27": 0, "41": 7, "42": 9, "47": 13, "57": 15, "68": 15, "69": 18, "74": 34, "75": 36, "76": 38, "77": 40, "78": 42, "79": 43, "80": 47, "81": 47, "82": 47, "83": 47, "84": 47, "85": 49, "86": 55, "87": 55, "88": 55, "89": 55, "90": 55, "91": 55, "92": 57, "93": 62, "94": 64, "95": 66, "96": 68, "97": 70, "98": 72, "99": 74, "100": 76, "101": 77, "102": 81, "103": 81, "104": 81, "105": 81, "106": 81, "107": 83, "108": 89, "109": 89, "110": 89, "111": 89, "112": 89, "113": 89, "114": 91, "115": 96, "116": 98, "117": 100, "118": 102, "119": 106, "125": 18}}
 __M_END_METADATA
 """

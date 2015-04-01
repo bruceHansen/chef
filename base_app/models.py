@@ -370,8 +370,6 @@ class Transaction(models.Model):
     # if it is in the store
     agent = models.ForeignKey('User',related_name='agent', null=True)
 
-    def __str__(self):
-        return self.tracking_number
 
     def email_receipt(self):
         '''

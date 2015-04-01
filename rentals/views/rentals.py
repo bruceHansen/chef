@@ -153,16 +153,15 @@ def rental_return(request):
 	params={}
 
 	# get the transactions for the active user
-	transaction = hmod.Transaction()
-	transaction.customer = request.user
-	transaction.transaction_date = datetime.datetime.now()
-	transaction.save()
+	transaction = hmod.Transaction.objects.get(customer_id=request.user.id)
+	print("hellooasdf;lkjsad;", transaction.id)
+
 
 	# Get the items that the user has currently rented out
+	# Grab the items without a date_in and where the customer is the current user
 
-	# Grab the items that are overdue
-	items = hmod.Item.objects.filter(owner=transaction.customer)
-	r_items = hmod.RentalItem.objects.filter(item_id=items)
+	r_items = hmod.RentalItem.objects.filter(transaction_id=transaction.id).filter(date_in=None)
+	print(r_items)
 
 	params['r_items'] = r_items
 
@@ -186,15 +185,16 @@ def item_return(request):
 		return HttpResponse('Item does not exist')
 
 	inv.quantity_on_hand += 1
-	inv.owner = ''
+	
 	#owner = hmod.Item.objects.filter(owner=inv.owner).delete()
 
-	ri = hmod.RentalItem.objects.filter()
-	ri.date_in = datetime.date.today()
+	ri = hmod.RentalItem.objects.get(id=request.urlparams[1])
+	ri.date_in = timezone.now()	
+	print(request.urlparams[1])
 
 	ri.save()
 
-	return templater.render_to_response(request, 'rental_return.html', params)
+	return HttpResponseRedirect('/rentals/rentals/')
 
 
 ##########################################################################################

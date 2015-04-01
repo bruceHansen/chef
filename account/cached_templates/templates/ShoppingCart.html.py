@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427910797.884019
+_modified_time = 1427920826.692943
 _enable_loop = True
 _template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\account\\templates/ShoppingCart.html'
 _template_uri = 'ShoppingCart.html'
@@ -28,10 +28,12 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        int = context.get('int', UNDEFINED)
         items = context.get('items', UNDEFINED)
+        int = context.get('int', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
+        str = context.get('str', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\n\n')
@@ -47,10 +49,12 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        int = context.get('int', UNDEFINED)
         items = context.get('items', UNDEFINED)
+        int = context.get('int', UNDEFINED)
         def content():
             return render_content(context)
+        str = context.get('str', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\t<div class="full-width-container">\n\t\t\n')
@@ -74,6 +78,12 @@ def render_content(context,**pageargs):
             __M_writer('\n')
         __M_writer('\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<th>\n\t\t\t\t\t\t\t\tTotal Price\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<th>\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<th class="total_price">\n\t\t\t\t\t\t\t\t')
         __M_writer(str( total ))
+        __M_writer('\n\t\t\t\t\t\t\t\t')
+        request.session['total'] = {} 
+        
+        __M_writer('\n\t\t\t\t\t\t\t\t')
+        request.session['total'] = str(total) 
+        
         __M_writer('\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t</div>\n')
         __M_writer('\n\t\t</div>\n')
         __M_writer('\n')
@@ -89,6 +99,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"uri": "ShoppingCart.html", "source_encoding": "ascii", "line_map": {"64": 49, "65": 49, "66": 52, "67": 52, "68": 55, "69": 55, "70": 58, "71": 58, "72": 61, "74": 61, "75": 63, "76": 71, "77": 71, "78": 78, "79": 81, "80": 83, "81": 87, "82": 87, "83": 95, "84": 98, "90": 84, "27": 0, "36": 7, "37": 9, "47": 11, "55": 11, "56": 14, "57": 17, "58": 20, "59": 42, "61": 42, "62": 43, "63": 44}, "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\account\\templates/ShoppingCart.html"}
+{"filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\account\\templates/ShoppingCart.html", "line_map": {"65": 42, "66": 43, "67": 44, "68": 49, "69": 49, "70": 52, "71": 52, "72": 55, "73": 55, "74": 58, "75": 58, "76": 61, "78": 61, "79": 63, "80": 71, "81": 71, "82": 72, "84": 72, "85": 73, "87": 73, "88": 80, "89": 83, "90": 85, "27": 0, "92": 89, "93": 97, "94": 100, "91": 89, "100": 94, "38": 7, "39": 9, "49": 11, "59": 11, "60": 14, "61": 17, "62": 20, "63": 42}, "uri": "ShoppingCart.html", "source_encoding": "ascii"}
 __M_END_METADATA
 """

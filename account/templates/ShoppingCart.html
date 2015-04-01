@@ -69,6 +69,8 @@
 							</th>
 							<th class="total_price">
 								${ total }
+								<% request.session['total'] = {} %>
+								<% request.session['total'] = str(total) %>
 							</th>
 						</tr>
 					</tbody>

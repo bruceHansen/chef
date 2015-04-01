@@ -177,7 +177,6 @@ def item_return(request):
 
 	try:
 		inv=hmod.Item.objects.get(id=request.urlparams[0])
-		print(inv)
 	except hmod.Item.DoesNotExist:
 		return HttpResponse('Item does not exist')
 

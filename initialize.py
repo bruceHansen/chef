@@ -98,6 +98,21 @@ group.user_set.add(user)
 #new user
 addrf = mod.Address(id=1)
 
+user = mod.User.objects.create_user( username='maddy', email='bruce@gmail.com', password='password' )
+user.first_name = 'Madeline'
+user.last_name = 'Cutie Pie'
+user.email = 'madelinecleveland@gmail.com'
+user.phone = '555-555-1234'
+user.security_question = 'Why are you so cute?'
+user.security_answer = 'Im the sweetest person in the world'
+user.address = addrf
+user.save()
+
+group.user_set.add(user)
+
+#new user
+addrf = mod.Address(id=1)
+
 user = mod.User.objects.create_user( username='Derik', email='Derikknowswhatsup@gmail.com', password='password' )
 user.first_name = 'Derik'
 user.last_name = 'Hasvold'

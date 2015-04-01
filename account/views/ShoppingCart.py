@@ -23,6 +23,12 @@ from django.contrib.auth import authenticate, login, logout
 import requests
 from datetime import datetime, timedelta
 import datetime
+from email.mime.text import MIMEText
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 
 templater = get_renderer('account')
 
@@ -189,7 +195,7 @@ class PaymentForm(CustomForm):
 		r= requests.post(API_URL, data = {
 			 'apiKey': API_KEY, 
 			 'currency': 'usd', 
-			 'amount': self.request.urlparams[0], 
+			 'amount': self.request.session['total'],
 			 'type': self.cleaned_data['card_company'],
 			 'number': self.cleaned_data['credit_card_number'],
 			 'exp_month': self.cleaned_data['exp_month'], 
@@ -341,7 +347,7 @@ def checkout(request):
 		if form.is_valid():
 
 			# Return user to list
-			return HttpResponseRedirect('/account/ShoppingCart.payment/' + request.urlparams[0])
+			return HttpResponseRedirect('/account/ShoppingCart.payment/')
 
 	params['form'] = form
 
@@ -420,7 +426,8 @@ def confirmation(request):
 			inv.quantity_on_hand -= request.session['cart'][pid]
 
 			si = hmod.SaleItem()
-			si.prod = inv
+			si.product = inv
+			print(si.product)
 			si.quantity = request.session['cart'][pid]
 			si.amount = inv.specs.price * request.session['cart'][pid]
 			si.transaction = transaction
@@ -446,5 +453,45 @@ def confirmation(request):
 
 	request.session['cart'] = {}
 
+	email = request.user.email
+	
+	# get the transactions for the active user
+	transaction = hmod.Transaction.objects.filter(customer_id=request.user.id)
+
+	for tran in transaction:
+		# Grab the items without a date_in and where the customer is the current user
+		r_items = hmod.RentalItem.objects.filter(transaction_id=tran.id).filter(date_in=None)
+
+		params['r_items'] = r_items
+
+
+	subject="Receipt for Colonial Heritage Foundation"
+
+
+	items = {}
+	
+	# Grab the items from the shopping cart:
+	for pid in request.session['cart']:
+
+		try:
+			item = hmod.Inventory.objects.get(id=pid)
+		except hmod.Inventory.DoesNotExist:
+			return HttpResponse('failed getting item')
+
+		items[item] = request.session['cart'][pid]
+
+	params['items'] = items
+	params['total'] = 0
+
+	body = templater.render(request, 'rentalscheckout_sendemail.html', params)  
+
+	send_mail(subject, body, 'brucehnsn@gmail.com', [request.user.email], html_message=body, fail_silently = False)
+
+
 
 	return templater.render_to_response(request, 'confirmation.html', params)
+
+##########################################################################################
+################################### CONFIRMATION ACTION ##################################
+##########################################################################################
+

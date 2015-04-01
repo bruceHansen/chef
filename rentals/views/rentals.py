@@ -141,9 +141,8 @@ def details(request):
 	return templater.render_to_response(request, 'ItemDetails.html', params)
 
 
-
 ##########################################################################################
-################################## RETURN RENTAL ITEMS ###################################
+################################## Display Rental ITEMS ###################################
 ##########################################################################################
 
 @view_function
@@ -159,18 +158,44 @@ def rental_return(request):
 	transaction.transaction_date = datetime.datetime.now()
 	transaction.save()
 
-	print(transaction.customer)
-
 	# Get the items that the user has currently rented out
 
-	
-		# Grab the items that are overdue
+	# Grab the items that are overdue
 	items = hmod.Item.objects.filter(owner=transaction.customer)
 	r_items = hmod.RentalItem.objects.filter(item_id=items)
 
-	print(r_items)
+	params['r_items'] = r_items
 
 	return templater.render_to_response(request, 'rental_return.html', params)	
+
+##########################################################################################
+################################## RETURN Specific ITEMS ###################################
+##########################################################################################
+
+@view_function
+@permission_required('base_app.add_item', login_url='/homepage/login/')
+def item_return(request):
+	
+	# Define the view bag
+	params={}
+
+	try:
+		inv=hmod.Item.objects.get(id=request.urlparams[0])
+		print(inv)
+	except hmod.Item.DoesNotExist:
+		return HttpResponse('Item does not exist')
+
+	inv.quantity_on_hand += 1
+	inv.owner = ''
+	#owner = hmod.Item.objects.filter(owner=inv.owner).delete()
+
+	ri = hmod.RentalItem.objects.filter()
+	ri.date_in = datetime.date.today()
+
+	ri.save()
+
+	return templater.render_to_response(request, 'rental_return.html', params)
+
 
 ##########################################################################################
 ##################################### SEARCH FORM ACTION #################################

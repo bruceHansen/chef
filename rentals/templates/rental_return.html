@@ -14,6 +14,48 @@
 
 <%block name="content">
 	
-	hello
+	%for r_item in r_items:
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>
+						Name
+					</th>
+					<th>
+						Due Date
+					</th>
+					<th>
+						Image
+					</th>
+					<th>
+						Actions
+					</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td>
+					
+						${ r_item.item.specs.name }
+						
+					</td>
+					<td>
+						${ r_item.due_date }
+					</td>
+					<td>
+						<img id="image_field" src="${ STATIC_URL }${ r_item.item.specs.photograph.image }" >
+					</td>
+					<td>
+						<a class="button" href="/rentals/rentals.item_return/${ r_item.item_id }">
+							<paper-button raised class="edit_button">Return</paper-button>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+
+	%endfor
 
 </%block>

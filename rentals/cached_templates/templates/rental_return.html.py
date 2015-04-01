@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427846442.464146
+_modified_time = 1427905500.687487
 _enable_loop = True
 _template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rental_return.html'
 _template_uri = 'rental_return.html'
@@ -30,8 +30,10 @@ def render_body(context,**pageargs):
         __M_locals = __M_dict_builtin(pageargs=pageargs)
         def content():
             return render_content(context._locals(__M_locals))
+        r_items = context.get('r_items', UNDEFINED)
         def tab_title():
             return render_tab_title(context._locals(__M_locals))
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n\r\n')
         __M_writer('\r\n\r\n')
@@ -54,8 +56,22 @@ def render_content(context,**pageargs):
     try:
         def content():
             return render_content(context)
+        r_items = context.get('r_items', UNDEFINED)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         __M_writer = context.writer()
-        __M_writer('\r\n\t\r\n\thello\r\n\r\n')
+        __M_writer('\r\n\t\r\n')
+        for r_item in r_items:
+            __M_writer('\t\t<table class="table table-hover table-bordered">\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\tName\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\tDue Date\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\tImage\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\tActions\r\n\t\t\t\t\t</th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t')
+            __M_writer(str( r_item.item.specs.name ))
+            __M_writer('\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t')
+            __M_writer(str( r_item.due_date ))
+            __M_writer('\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<img id="image_field" src="')
+            __M_writer(str( STATIC_URL ))
+            __M_writer(str( r_item.item.specs.photograph.image ))
+            __M_writer('" >\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<a class="button" href="/rentals/rentals.item_return/')
+            __M_writer(str( r_item.item_id ))
+            __M_writer('">\r\n\t\t\t\t\t\t\t<paper-button raised class="edit_button">Return</paper-button>\r\n\t\t\t\t\t\t</a>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\r\n\t\t</table>\r\n\r\n')
+        __M_writer('\r\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -75,6 +91,6 @@ def render_tab_title(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"64": 11, "52": 15, "37": 9, "70": 11, "36": 7, "42": 13, "27": 0, "76": 70, "58": 15}, "uri": "rental_return.html", "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rental_return.html", "source_encoding": "ascii"}
+{"line_map": {"64": 18, "65": 40, "66": 40, "67": 44, "68": 44, "69": 47, "38": 7, "39": 9, "72": 50, "73": 50, "74": 60, "71": 47, "44": 13, "86": 11, "80": 11, "92": 86, "54": 15, "27": 0, "70": 47, "62": 15, "63": 17}, "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rental_return.html", "source_encoding": "ascii", "uri": "rental_return.html"}
 __M_END_METADATA
 """

@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1426621096.535839
+_modified_time = 1427931539.403472
 _enable_loop = True
-_template_filename = '/Users/John/DevProjects/Repositories/chef/homepage/templates/email_sent.html'
+_template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\homepage\\templates/email_sent.html'
 _template_uri = 'email_sent.html'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['page_title', 'tab_title', 'content']
+_exports = ['content', 'page_title', 'tab_title']
 
 
 def _mako_get_namespace(context, name):
@@ -28,12 +28,12 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        def content():
+            return render_content(context._locals(__M_locals))
         def page_title():
             return render_page_title(context._locals(__M_locals))
         def tab_title():
             return render_tab_title(context._locals(__M_locals))
-        def content():
-            return render_content(context._locals(__M_locals))
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\n\n')
@@ -46,6 +46,33 @@ def render_body(context,**pageargs):
             context['self'].content(**pageargs)
         
 
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
+def render_content(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def content():
+            return render_content(context)
+        def page_title():
+            return render_page_title(context)
+        __M_writer = context.writer()
+        __M_writer('\n\n')
+        __M_writer('\t')
+        if 'parent' not in context._data or not hasattr(context._data['parent'], 'page_title'):
+            context['self'].page_title(**pageargs)
+        
+
+        __M_writer('\n')
+        __M_writer('\n')
+        __M_writer('\t<div class="row main_row">\n\t\t\n')
+        __M_writer('\t\t<div class="col-md-12">\n\n\t\t\t<div class="spacer"></div>\n\t\t\t<div class="spacer"></div>\n\t\t\t\n\t\t\t<p>An email has been sent to your inbox.</p>\n\n\t\t\t<div class="spacer"></div>\n\t\t\t<div class="spacer"></div>\n\n\t\t\t<p>Please follow the link in your email to reset your password.</p>\n\n\t\t</div>\n')
+        __M_writer('\n\t</div>\n')
+        __M_writer('\n\n')
+        __M_writer('\t<div class="spacer"></div>\n\t<div class="spacer"></div>\n\t<div class="spacer"></div>\n')
+        __M_writer('\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -77,35 +104,8 @@ def render_tab_title(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_content(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def page_title():
-            return render_page_title(context)
-        def content():
-            return render_content(context)
-        __M_writer = context.writer()
-        __M_writer('\n\n')
-        __M_writer('\t')
-        if 'parent' not in context._data or not hasattr(context._data['parent'], 'page_title'):
-            context['self'].page_title(**pageargs)
-        
-
-        __M_writer('\n')
-        __M_writer('\n')
-        __M_writer('\t<div class="row main_row">\n\t\t\n')
-        __M_writer('\t\t<div class="col-md-12">\n\n\t\t\t<div class="spacer"></div>\n\t\t\t<div class="spacer"></div>\n\t\t\t\n\t\t\t<p>An email has been sent to your inbox.</p>\n\n\t\t\t<div class="spacer"></div>\n\t\t\t<div class="spacer"></div>\n\n\t\t\t<p>Please follow the link in your email to reset your password.</p>\n\n\t\t</div>\n')
-        __M_writer('\n\t</div>\n')
-        __M_writer('\n\n')
-        __M_writer('\t<div class="spacer"></div>\n\t<div class="spacer"></div>\n\t<div class="spacer"></div>\n')
-        __M_writer('\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 """
 __M_BEGIN_METADATA
-{"line_map": {"68": 11, "74": 11, "80": 15, "88": 15, "89": 18, "27": 0, "94": 28, "95": 30, "96": 32, "97": 35, "98": 49, "99": 52, "100": 55, "101": 59, "38": 7, "39": 9, "107": 101, "44": 13, "54": 18, "60": 18, "61": 22, "62": 26}, "source_encoding": "ascii", "filename": "/Users/John/DevProjects/Repositories/chef/homepage/templates/email_sent.html", "uri": "email_sent.html"}
+{"line_map": {"68": 28, "69": 30, "70": 32, "71": 35, "72": 49, "73": 52, "74": 55, "75": 59, "81": 18, "87": 18, "88": 22, "89": 26, "27": 0, "95": 11, "101": 11, "38": 7, "39": 9, "107": 101, "44": 13, "54": 15, "62": 15, "63": 18}, "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\homepage\\templates/email_sent.html", "uri": "email_sent.html", "source_encoding": "ascii"}
 __M_END_METADATA
 """

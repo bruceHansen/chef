@@ -4,9 +4,9 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1425673945.850481
+_modified_time = 1427931371.927195
 _enable_loop = True
-_template_filename = '/Users/John/DevProjects/Repositories/chef/account/templates/modal_password.html'
+_template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\account\\templates/modal_password.html'
 _template_uri = 'modal_password.html'
 _source_encoding = 'ascii'
 import os, os.path, re
@@ -32,8 +32,8 @@ def render_body(context,**pageargs):
             return render_extra_links(context._locals(__M_locals))
         def content():
             return render_content(context._locals(__M_locals))
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         form = context.get('form', UNDEFINED)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\n\n')
@@ -83,6 +83,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"69": 18, "38": 8, "39": 10, "44": 16, "76": 18, "77": 20, "78": 20, "84": 78, "54": 12, "27": 0, "61": 12, "62": 14, "63": 14}, "source_encoding": "ascii", "uri": "modal_password.html", "filename": "/Users/John/DevProjects/Repositories/chef/account/templates/modal_password.html"}
+{"source_encoding": "ascii", "uri": "modal_password.html", "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\account\\templates/modal_password.html", "line_map": {"69": 18, "38": 8, "39": 10, "44": 16, "76": 18, "77": 20, "78": 20, "84": 78, "54": 12, "27": 0, "61": 12, "62": 14, "63": 14}}
 __M_END_METADATA
 """

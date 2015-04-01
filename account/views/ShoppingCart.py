@@ -452,9 +452,6 @@ def confirmation(request):
 
 			inv.save()
 
-	email = request.user.email
-	
-
 	### view current rentals
 	# get the transactions for the active user, this is to populate the rentals that the user has
 	transaction = hmod.Transaction.objects.filter(customer_id=request.user.id)
@@ -467,24 +464,17 @@ def confirmation(request):
 	### end view current rentals
 
 
-
-
-
-	for li in transaction.saleitem_set.all():
-		print(li)
-
-
-
 	items = []
 	quantity = []
 
 	for item_id in request.session['cart']:
 		try:
-			items.append(hmod.Inventory.objects.get(id=item_id))
+			item = hmod.Inventory.objects.get(id=item_id)
 		except:
 			HttpResponse('Item does not exist')
 
 		item.quantity = request.session['cart'][item_id]
+		items.append(item)
 
 	params['items'] = items
 

@@ -215,6 +215,41 @@ class PasswordForm(CustomForm):
 
 		return self.cleaned_data	
 
+class ResetPasswordForm(CustomForm):
+
+	'''
+		Form that comes up in the password modal to change the user's password. 
+	'''
+
+	# Don't include the delete button
+	delete_button = False
+
+	# Don't include the cancel button
+	cancel_button = False
+
+	# Custom action
+	custom_action = '/account/MyAccount.forgot_password/'
+
+	# Custom id for the form
+	form_id = "password_form"
+
+	new_password = forms.CharField(required=True, max_length=100, widget=forms.PasswordInput)
+	confirm_password = forms.CharField(required=True, max_length=100, widget=forms.PasswordInput)
+
+	def clean(self):
+
+		if self.is_valid():
+
+			# Test to see if the two passwords are equal
+			if self.cleaned_data['new_password'] != self.cleaned_data['confirm_password']:
+				raise forms.ValidationError(_("Password entered in confirmation field is different from new password entered."))
+
+			print('<<<<<<<<<<<<<<<<<< passed *')
+
+		return self.cleaned_data	
+
+
+
 ##########################################################################################
 ################################# DEFAULT ACTION #########################################
 ##########################################################################################
@@ -438,6 +473,58 @@ def check_username(request):
 
 @view_function
 def change_password(request):
+	''' Modal that pops up to change the password for a user. '''
+
+	# Define the view bag
+	params = {}
+
+	# Get the user ID
+	user_id = request.user.id
+
+	# Get the user according to ID passed in
+	try:
+		user = hmod.User.objects.get(id=user_id)
+	except hmod.User.DoesNotExist:
+		return HttpResponse('failed getting user')
+
+	form = PasswordForm(request)
+
+	form.user_id = user_id
+
+	if request.method == 'POST':
+
+		form = PasswordForm(request, request.POST)
+
+		if form.is_valid():
+
+			## Set the password as the new password
+			user.set_password(form.cleaned_data['new_password'])
+
+			user.save()
+
+			## Authenticate
+			login_user = authenticate(username=user.username, password=form.cleaned_data['new_password'])
+
+			## Relogin
+			login(request, login_user)
+
+			return HttpResponse('''
+				<script>
+					$( "#password_modal" ).modal("hide");
+				</script>
+			''')
+
+	params['form'] = form
+	params['user'] = user
+
+	return templater.render_to_response(request, 'modal_password.html', params)
+
+##########################################################################################
+################################ FORGOT PASSWORD ACTION ##################################
+##########################################################################################
+
+@view_function
+def forgot_password(request):
 	''' Modal that pops up to change the password for a user. '''
 
 	# Define the view bag

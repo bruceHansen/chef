@@ -18,6 +18,11 @@ import base_app.models as hmod
 from django_mako_plus.controller.router import get_renderer
 from django.contrib.auth import authenticate, login, logout
 from ldap3 import Server, Connection, AUTH_SIMPLE, STRATEGY_SYNC, GET_ALL_INFO
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 
 
 templater = get_renderer('homepage')
@@ -174,9 +179,18 @@ def reset_password(request):
 		form = EmailForm(request, request.POST)
 
 		if form.is_valid():
-
-			## Email the user here!!
 			
+			email = form.cleaned_data['email']
+			
+			## Email the user here!!
+			subject="Email, Password Reset"
+
+			body = templater.render(request, 'forgot_password.html', params)  
+
+			send_mail(subject, body, 'brucehnsn@gmail.com', [email], html_message=body, fail_silently = False)
+
+
+
 			## Send user to the "email sent" page
 			return templater.render_to_response(request, 'email_sent.html', params)
 

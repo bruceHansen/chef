@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427776977.322764
+_modified_time = 1427835043.898685
 _enable_loop = True
 _template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\account\\templates/ShoppingCart.html'
 _template_uri = 'ShoppingCart.html'
@@ -28,10 +28,10 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        items = context.get('items', UNDEFINED)
         int = context.get('int', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
+        items = context.get('items', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\n\n')
@@ -47,20 +47,20 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        items = context.get('items', UNDEFINED)
         int = context.get('int', UNDEFINED)
         def content():
             return render_content(context)
+        items = context.get('items', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\t<div class="full-width-container">\n\t\t\n')
         __M_writer('\t\t<div class="row">\n\t\t\t\n')
-        __M_writer('\t\t\t<div class="table-responsive">\n\t\t\t\t<table class="table table-hover table-bordered">\n\t\t\t\t\t<thead>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<th>\n\t\t\t\t\t\t\t\tProduct\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<th class="quantity">\n\t\t\t\t\t\t\t\tQuantity\t\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<th class="price">\n\t\t\t\t\t\t\t\tPrice\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<th>\n\t\t\t\t\t\t\t\tActions\t\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</thead>\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t')
+        __M_writer('\t\t\t<div class="table-responsive">\n\t\t\t\t<table class="table table-hover table-bordered">\n\t\t\t\t\t<thead>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<th>\n\t\t\t\t\t\t\t\tType\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<th>\n\t\t\t\t\t\t\t\tProduct\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<th class="quantity">\n\t\t\t\t\t\t\t\tQuantity\t\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<th class="price">\n\t\t\t\t\t\t\t\tPrice\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<th>\n\t\t\t\t\t\t\t\tActions\t\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</thead>\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t')
         total = 0 
         
         __M_writer('\n')
         for item in items:
-            __M_writer('\t\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t')
+            __M_writer('\t\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t')
             __M_writer(str( item.specs.name ))
             __M_writer('\n\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t<td class="quantity">\n\t\t\t\t\t\t\t\t\t')
             __M_writer(str( items[item] ))
@@ -89,6 +89,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\account\\templates/ShoppingCart.html", "source_encoding": "ascii", "uri": "ShoppingCart.html", "line_map": {"64": 43, "65": 43, "66": 46, "67": 46, "68": 49, "69": 49, "70": 52, "71": 52, "72": 55, "74": 55, "75": 57, "76": 65, "77": 65, "78": 72, "79": 75, "80": 77, "81": 81, "82": 81, "83": 89, "84": 92, "90": 84, "27": 0, "36": 7, "37": 9, "47": 11, "55": 11, "56": 14, "57": 17, "58": 20, "59": 39, "61": 39, "62": 40, "63": 41}}
+{"uri": "ShoppingCart.html", "source_encoding": "ascii", "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\account\\templates/ShoppingCart.html", "line_map": {"64": 49, "65": 49, "66": 52, "67": 52, "68": 55, "69": 55, "70": 58, "71": 58, "72": 61, "74": 61, "75": 63, "76": 71, "77": 71, "78": 78, "79": 81, "80": 83, "81": 87, "82": 87, "83": 95, "84": 98, "90": 84, "27": 0, "36": 7, "37": 9, "47": 11, "55": 11, "56": 14, "57": 17, "58": 20, "59": 42, "61": 42, "62": 43, "63": 44}}
 __M_END_METADATA
 """

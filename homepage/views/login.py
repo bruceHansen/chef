@@ -17,6 +17,8 @@ from django_mako_plus.controller import view_function
 import base_app.models as hmod
 from django_mako_plus.controller.router import get_renderer
 from django.contrib.auth import authenticate, login, logout
+from ldap3 import Server, Connection, AUTH_SIMPLE, STRATEGY_SYNC, GET_ALL_INFO
+
 
 templater = get_renderer('homepage')
 
@@ -35,6 +37,11 @@ class LoginForm(CustomForm):
 
 		# Check to see if self is valid
 		if self.is_valid():
+
+
+
+
+			#log user in
 
 			# See if username and password combo is correct
 			user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
@@ -104,6 +111,19 @@ def process_request(request):
 
 		if form.is_valid():
 
+			# validate against active directory
+			#s = Server('byuldap.byu.edu', port=389, get_info=GET_ALL_INFO)
+			#c = Connection(s, auto_bind = true, client_strategy = STRATEGY_SYNC,
+			#user='cn=pearl18,ou=people,o-ces', password='idahorocks18', authentication=AUTH_SIMPLE)
+
+			#if c is not None :
+				#u = amod.User.objects.get_or_create(username=form.cleaned_data['username'])
+				#u.first_name = 
+				#u.last_name = 
+				#u.email
+				#u.set_password()
+				#u.save()
+
 			## Authenticate again
 			user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
 			
@@ -121,6 +141,8 @@ def process_request(request):
 				''')
 
 	params['form'] = form
+
+
 
 	# If the user was brought here from the front-page login button, return the ajax form
 	# If not, send user to the main login page. 

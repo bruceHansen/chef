@@ -21,6 +21,8 @@ from django.utils.translation import ugettext as _
 from base_app.CustomWidgets import CustomSelect, CustomRadioRenderer
 from django.contrib.auth import authenticate, login, logout
 import requests
+from datetime import datetime, timedelta
+import datetime
 
 templater = get_renderer('account')
 
@@ -272,6 +274,8 @@ def add(request):
 	# Make sure the session variable recognizes the change
 	request.session.modified = True
 
+
+
 	return HttpResponseRedirect('/account/ShoppingCart/')
 
 ##########################################################################################
@@ -387,5 +391,60 @@ def confirmation(request):
 
 	# Define the view bag
 	params={}
+
+	### update the rental period if a rental ###
+	#create dictionary for items
+	inventory = {}
+
+	# create a transaction
+
+	transaction = hmod.Transaction()
+	transaction.customer = request.user
+	transaction.transaction_date = datetime.datetime.now()
+	transaction.save()
+
+	# Grab the items from the shopping cart:
+	for pid in request.session['cart']:
+
+		try:
+			inv=hmod.Item.objects.get(id=pid)
+			rentable = True
+		except hmod.Item.DoesNotExist:
+			try: 
+				inv=hmod.Inventory.objects.get(id=pid)
+				rentable=False
+			except:
+				return HttpResponse('Item does not exist')
+
+		if not rentable:
+			inv.quantity_on_hand -= request.session['cart'][pid]
+
+			si = hmod.SaleItem()
+			si.prod = inv
+			si.quantity = request.session['cart'][pid]
+			si.amount = inv.specs.price * request.session['cart'][pid]
+			si.transaction = transaction
+
+			si.save()
+
+		else:
+			inv.quantity_on_hand -= 1
+			inv.owner = transaction.customer
+			inv.times_rented += 1
+
+			#make rental line item
+			ri = hmod.RentalItem()
+			ri.date_out = datetime.date.today()
+			ri.due_date = datetime.date.today() + timedelta(days=request.session['cart'][pid])
+			ri.amount = inv.standard_rental_price * request.session['cart'][pid]
+			ri.item = inv
+			ri.transaction = transaction
+
+			ri.save()
+
+			inv.save()
+
+	request.session['cart'] = {}
+
 
 	return templater.render_to_response(request, 'confirmation.html', params)

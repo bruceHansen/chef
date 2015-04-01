@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427323872.335832
+_modified_time = 1427846535.953405
 _enable_loop = True
-_template_filename = 'C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rentals.html'
+_template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rentals.html'
 _template_uri = 'rentals.html'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['content', 'page_title', 'tab_title']
+_exports = ['content', 'tab_title', 'page_title']
 
 
 def _mako_get_namespace(context, name):
@@ -28,9 +28,9 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         non_wardrobe = context.get('non_wardrobe', UNDEFINED)
         def tab_title():
             return render_tab_title(context._locals(__M_locals))
@@ -57,12 +57,12 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def content():
             return render_content(context)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        non_wardrobe = context.get('non_wardrobe', UNDEFINED)
         def page_title():
             return render_page_title(context)
-        non_wardrobe = context.get('non_wardrobe', UNDEFINED)
         wardrobe = context.get('wardrobe', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\t\n')
@@ -122,22 +122,6 @@ def render_content(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_page_title(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def page_title():
-            return render_page_title(context)
-        __M_writer = context.writer()
-        __M_writer('\n\t\t<div class="row">\n\t\t\t\n')
-        __M_writer('\t\t\t<div class="col-md-8">\n\t\t\t\t<h1>View Rentals Available</h1>\n\t\t\t</div>\n')
-        __M_writer('\n')
-        __M_writer('\t\t\t<div class="col-md-4">\n\t\t\t\t<paper-button class="create_button search_button" raised>Search</paper-button>\n\t\t\t</div>\n')
-        __M_writer('\n\t\t</div>\n\t')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 def render_tab_title(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
@@ -150,8 +134,26 @@ def render_tab_title(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_page_title(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def page_title():
+            return render_page_title(context)
+        __M_writer = context.writer()
+        __M_writer('\n\t\t<div class="row">\n\t\t\t\n')
+        __M_writer('\t\t\t<div class="col-md-8">\n\t\t\t\t<h1>View Rentals Available</h1>\n\t\t\t</div>\n')
+        __M_writer('\n')
+        __M_writer('\t\t\t<div class="col-md-4">\n\t\t\t\t<paper-button class="create_button search_button" raised>Search</paper-button>\n\t\t\t\t<a href="/rentals/rentals.rental_return">\n\t\t\t\t\t<paper-button class="create_button search_button" raised>Return Rentals</paper-button>\n\t\t\t\t</a>\n\t\t\t</div>\n')
+        __M_writer('\n')
+        __M_writer('\n\t\t\t\t\n\n')
+        __M_writer('\n\t\t</div>\n\t')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 """
 __M_BEGIN_METADATA
-{"filename": "C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rentals.html", "source_encoding": "ascii", "uri": "rentals.html", "line_map": {"131": 18, "132": 22, "133": 26, "134": 28, "135": 32, "141": 11, "147": 11, "153": 147, "27": 0, "41": 7, "42": 9, "47": 13, "57": 15, "68": 15, "69": 18, "74": 34, "75": 36, "76": 38, "77": 40, "78": 42, "79": 43, "80": 47, "81": 47, "82": 47, "83": 47, "84": 47, "85": 49, "86": 53, "87": 53, "88": 53, "89": 53, "90": 53, "91": 53, "92": 55, "93": 60, "94": 62, "95": 64, "96": 66, "97": 68, "98": 70, "99": 72, "100": 74, "101": 75, "102": 79, "103": 79, "104": 79, "105": 79, "106": 79, "107": 81, "108": 85, "109": 85, "110": 85, "111": 85, "112": 85, "113": 85, "114": 87, "115": 92, "116": 94, "117": 96, "118": 98, "119": 102, "125": 18}}
+{"line_map": {"131": 11, "137": 18, "143": 18, "144": 22, "145": 26, "146": 28, "147": 35, "148": 37, "149": 41, "27": 0, "155": 149, "41": 7, "42": 9, "47": 13, "57": 15, "68": 15, "69": 18, "74": 43, "75": 45, "76": 47, "77": 49, "78": 51, "79": 52, "80": 56, "81": 56, "82": 56, "83": 56, "84": 56, "85": 58, "86": 62, "87": 62, "88": 62, "89": 62, "90": 62, "91": 62, "92": 64, "93": 69, "94": 71, "95": 73, "96": 75, "97": 77, "98": 79, "99": 81, "100": 83, "101": 84, "102": 88, "103": 88, "104": 88, "105": 88, "106": 88, "107": 90, "108": 94, "109": 94, "110": 94, "111": 94, "112": 94, "113": 94, "114": 96, "115": 101, "116": 103, "117": 105, "118": 107, "119": 111, "125": 11}, "uri": "rentals.html", "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rentals.html", "source_encoding": "ascii"}
 __M_END_METADATA
 """

@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427773718.211106
+_modified_time = 1427839578.488216
 _enable_loop = True
 _template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\products\\templates/products.html'
 _template_uri = 'products.html'
@@ -28,11 +28,11 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        s_items = context.get('s_items', UNDEFINED)
         def tab_title():
             return render_tab_title(context._locals(__M_locals))
         def page_title():
             return render_page_title(context._locals(__M_locals))
+        s_items = context.get('s_items', UNDEFINED)
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
@@ -59,11 +59,11 @@ def render_content(context,**pageargs):
     try:
         def content():
             return render_content(context)
-        s_items = context.get('s_items', UNDEFINED)
         def page_title():
             return render_page_title(context)
         bulk_items = context.get('bulk_items', UNDEFINED)
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        s_items = context.get('s_items', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\t\n')
         __M_writer('\t')
@@ -152,6 +152,6 @@ def render_page_title(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"source_encoding": "ascii", "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\products\\templates/products.html", "uri": "products.html", "line_map": {"131": 11, "137": 18, "143": 18, "144": 22, "145": 26, "146": 28, "147": 32, "153": 147, "27": 0, "41": 7, "42": 9, "47": 13, "57": 15, "68": 15, "69": 18, "74": 34, "75": 36, "76": 38, "77": 40, "78": 42, "79": 43, "80": 47, "81": 47, "82": 47, "83": 47, "84": 47, "85": 49, "86": 55, "87": 55, "88": 55, "89": 55, "90": 55, "91": 55, "92": 57, "93": 62, "94": 64, "95": 66, "96": 68, "97": 70, "98": 72, "99": 74, "100": 76, "101": 77, "102": 81, "103": 81, "104": 81, "105": 81, "106": 81, "107": 83, "108": 89, "109": 89, "110": 89, "111": 89, "112": 89, "113": 89, "114": 91, "115": 96, "116": 98, "117": 100, "118": 102, "119": 106, "125": 11}}
+{"line_map": {"131": 11, "137": 18, "143": 18, "144": 22, "145": 26, "146": 28, "147": 32, "153": 147, "27": 0, "41": 7, "42": 9, "47": 13, "57": 15, "68": 15, "69": 18, "74": 34, "75": 36, "76": 38, "77": 40, "78": 42, "79": 43, "80": 47, "81": 47, "82": 47, "83": 47, "84": 47, "85": 49, "86": 55, "87": 55, "88": 55, "89": 55, "90": 55, "91": 55, "92": 57, "93": 62, "94": 64, "95": 66, "96": 68, "97": 70, "98": 72, "99": 74, "100": 76, "101": 77, "102": 81, "103": 81, "104": 81, "105": 81, "106": 81, "107": 83, "108": 89, "109": 89, "110": 89, "111": 89, "112": 89, "113": 89, "114": 91, "115": 96, "116": 98, "117": 100, "118": 102, "119": 106, "125": 11}, "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\products\\templates/products.html", "uri": "products.html", "source_encoding": "ascii"}
 __M_END_METADATA
 """

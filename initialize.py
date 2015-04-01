@@ -374,6 +374,7 @@ inventory.quantity_on_hand = 1
 inventory.shelf_location   = 'Corner'
 inventory.order_file       = 'Test File'
 inventory.condition        = 'Old'
+inventory.rental_period    = 30
 inventory.specs            = specs
 
 inventory.save()
@@ -455,6 +456,16 @@ rental_item.replacement_price    = 2.00
 rental_item.save()
 
 # Item not for rent
+
+# Item for rent
+photo              = mod.Photograph()
+photo.place_taken  = "Colonial Heritage Fsetival"
+photo.image        = "rentals/media/canon.jpg"
+photo.description  = "A canon that really fires!"
+photo.photographer = user
+
+photo.save()
+
 specs                = mod.ProductSpecification()
 specs.name           = 'Full-Sized Replica of the Liberty Bell'
 specs.price          = 20000.0
@@ -464,6 +475,7 @@ specs.average_cost   = 2.0
 specs.sku            = '111'
 specs.order_form_name= 'Test order form'
 specs.production_time= 'Test production time'
+specs.photograph      = photo
 
 specs.save()
 

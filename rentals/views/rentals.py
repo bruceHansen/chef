@@ -19,6 +19,8 @@ import base_app.models as hmod
 from django.utils.translation import ugettext as _
 from django_mako_plus.controller.router import get_renderer
 from django.utils import timezone
+from datetime import datetime, timedelta
+import datetime
 
 templater = get_renderer('rentals')
 
@@ -137,6 +139,38 @@ def details(request):
 	params['item'] = item
 
 	return templater.render_to_response(request, 'ItemDetails.html', params)
+
+
+
+##########################################################################################
+################################## RETURN RENTAL ITEMS ###################################
+##########################################################################################
+
+@view_function
+@permission_required('base_app.add_item', login_url='/homepage/login/')
+def rental_return(request):
+	
+	# Define the view bag
+	params={}
+
+	# get the transactions for the active user
+	transaction = hmod.Transaction()
+	transaction.customer = request.user
+	transaction.transaction_date = datetime.datetime.now()
+	transaction.save()
+
+	print(transaction.customer)
+
+	# Get the items that the user has currently rented out
+
+	
+		# Grab the items that are overdue
+	items = hmod.Item.objects.filter(owner=transaction.customer)
+	r_items = hmod.RentalItem.objects.filter(item_id=items)
+
+	print(r_items)
+
+	return templater.render_to_response(request, 'rental_return.html', params)	
 
 ##########################################################################################
 ##################################### SEARCH FORM ACTION #################################

@@ -39,6 +39,7 @@
 			## END IMAGE OF ITEM ##
 
 		</div>
+
 		## END LEFT COLUMN ##
 
 		## MIDDLE COLUMN ##
@@ -66,31 +67,29 @@
 			</div>
 			## END ITEM RENTAL PRICE PER DAY ##
 
+			## STATE RENTAL PERIOD ##
+			<div class="spacer"</div>
+
+			<div class="item_info">
+				<p>Rental Period: 30 Days </p>
+			</div>
+
+			## END STATE RENTAL PERIOD ##
+
+
+						## ADD TO CART BUTTON ##
+			<div class="spacer"></div>
+
+			<div class="">
+				<paper-button raised data-pid="${ item.id }" class="create_button add_button">Add to Cart</paper-button>
+			</div>
+			## END ADD TO CART BUTTON ##
+
 		</div>
 		## END MIDDLE COLUMN ##
 
 		## RIGHT COLUMN ##
 		<div class="col-md-3">
-
-			## START DATE FIELD ##
-			<div class="start_date">
-				<paper-input-decorator class="short" floatingLabel label="Rental Start Date">
-					<input is="core-input" id="start_date" class="datetimepicker" value=""/>
-				</paper-input-decorator>
-			</div>
-			## END START DATE FIELD ##
-
-			## END DATE FIELD ##
-			<div class="end_date">
-				<paper-input-decorator class="short" floatingLabel label="Rental End Date">
-					<input is="core-input" id="end_date" class="datetimepicker" value=""/>
-				</paper-input-decorator>
-			</div>
-			## END END DATE FIELD ##
-
-			## ADD TO CART BUTTON ##
-			<paper-button raised data-pid="${ item.id }" class="create_button add_button">Add to Cart</paper-button>
-			## END ADD TO CART BUTTON ##
 
 		</div>
 		## END RIGHT COLUMN ##

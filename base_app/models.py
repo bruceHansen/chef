@@ -274,6 +274,7 @@ class Inventory(models.Model):
     order_file       = models.TextField(max_length=1000)
     condition        = models.TextField(max_length=100)
     note             = models.TextField(null=True)
+    rental_period    = models.IntegerField(null=True)
     specs            = models.ForeignKey(ProductSpecification)
 
     def __str__(self):
@@ -296,8 +297,7 @@ class Item(Inventory):
     price_per_day         = models.DecimalField(null=True, max_digits=10, decimal_places=2)
     replacement_price     = models.DecimalField(null=True, max_digits=10, decimal_places=2)
 
-    def __str__(self):
-        return self.name
+
 
     def generate_inventory_report(self):
         "Returns the information about the products held in inventory"

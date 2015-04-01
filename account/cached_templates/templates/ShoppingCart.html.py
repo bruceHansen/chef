@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427920826.692943
+_modified_time = 1427928138.971317
 _enable_loop = True
 _template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\account\\templates/ShoppingCart.html'
 _template_uri = 'ShoppingCart.html'
@@ -29,10 +29,10 @@ def render_body(context,**pageargs):
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
         items = context.get('items', UNDEFINED)
-        int = context.get('int', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
         str = context.get('str', UNDEFINED)
+        int = context.get('int', UNDEFINED)
         request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
@@ -50,10 +50,10 @@ def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         items = context.get('items', UNDEFINED)
-        int = context.get('int', UNDEFINED)
         def content():
             return render_content(context)
         str = context.get('str', UNDEFINED)
+        int = context.get('int', UNDEFINED)
         request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
@@ -99,6 +99,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\account\\templates/ShoppingCart.html", "line_map": {"65": 42, "66": 43, "67": 44, "68": 49, "69": 49, "70": 52, "71": 52, "72": 55, "73": 55, "74": 58, "75": 58, "76": 61, "78": 61, "79": 63, "80": 71, "81": 71, "82": 72, "84": 72, "85": 73, "87": 73, "88": 80, "89": 83, "90": 85, "27": 0, "92": 89, "93": 97, "94": 100, "91": 89, "100": 94, "38": 7, "39": 9, "49": 11, "59": 11, "60": 14, "61": 17, "62": 20, "63": 42}, "uri": "ShoppingCart.html", "source_encoding": "ascii"}
+{"filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\account\\templates/ShoppingCart.html", "uri": "ShoppingCart.html", "line_map": {"65": 42, "66": 43, "67": 44, "68": 49, "69": 49, "70": 52, "71": 52, "72": 55, "73": 55, "74": 58, "75": 58, "76": 61, "78": 61, "79": 63, "80": 71, "81": 71, "82": 72, "84": 72, "85": 73, "87": 73, "88": 80, "89": 83, "90": 85, "27": 0, "92": 89, "93": 97, "94": 100, "91": 89, "100": 94, "38": 7, "39": 9, "49": 11, "59": 11, "60": 14, "61": 17, "62": 20, "63": 42}, "source_encoding": "ascii"}
 __M_END_METADATA
 """

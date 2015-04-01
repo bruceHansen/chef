@@ -30,6 +30,7 @@ from email.mime.text import MIMEText
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 
+
 templater = get_renderer('account')
 
 ##########################################################################################
@@ -451,11 +452,11 @@ def confirmation(request):
 
 			inv.save()
 
-	request.session['cart'] = {}
-
 	email = request.user.email
 	
-	# get the transactions for the active user
+
+	### view current rentals
+	# get the transactions for the active user, this is to populate the rentals that the user has
 	transaction = hmod.Transaction.objects.filter(customer_id=request.user.id)
 
 	for tran in transaction:
@@ -463,31 +464,37 @@ def confirmation(request):
 		r_items = hmod.RentalItem.objects.filter(transaction_id=tran.id).filter(date_in=None)
 
 		params['r_items'] = r_items
+	### end view current rentals
 
 
-	subject="Receipt for Colonial Heritage Foundation"
 
 
-	items = {}
-	
-	# Grab the items from the shopping cart:
-	for pid in request.session['cart']:
 
+	for li in transaction.saleitem_set.all():
+		print(li)
+
+
+
+	items = []
+	quantity = []
+
+	for item_id in request.session['cart']:
 		try:
-			item = hmod.Inventory.objects.get(id=pid)
-		except hmod.Inventory.DoesNotExist:
-			return HttpResponse('failed getting item')
+			items.append(hmod.Inventory.objects.get(id=item_id))
+		except:
+			HttpResponse('Item does not exist')
 
-		items[item] = request.session['cart'][pid]
+		item.quantity = request.session['cart'][item_id]
 
 	params['items'] = items
-	params['total'] = 0
+
+	subject="Receipt for Colonial Heritage Foundation"
 
 	body = templater.render(request, 'rentalscheckout_sendemail.html', params)  
 
 	send_mail(subject, body, 'brucehnsn@gmail.com', [request.user.email], html_message=body, fail_silently = False)
 
-
+	request.session['cart'] = {}
 
 	return templater.render_to_response(request, 'confirmation.html', params)
 

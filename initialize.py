@@ -619,7 +619,7 @@ for data in [
 	{'date_out':'2014-01-01 00:00:00', 'due_date': '2015-03-19', 'item':wardrobe_item, 'transaction':transaction, 'amount':20.00},
 	{'date_out':'2014-01-01 00:00:00', 'due_date': '2015-01-20', 'item':wardrobe_item, 'transaction':transaction, 'amount':20.00},
 	{'date_out':'2014-01-01 00:00:00', 'due_date': '2014-01-20', 'item':rental_item, 'transaction':transaction, 'amount':20.00}
-	
+
 ]:
 
 	rental = mod.RentalItem()

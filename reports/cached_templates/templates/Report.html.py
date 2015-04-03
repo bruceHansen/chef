@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428021169.392912
+_modified_time = 1428021895.585363
 _enable_loop = True
 _template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\reports\\templates/Report.html'
 _template_uri = 'Report.html'
@@ -72,7 +72,7 @@ def render_view_table(context,**pageargs):
         ninety_plus = context.get('ninety_plus', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\t\n')
-        __M_writer('\t<div class="table-responsive">\n\t\t<table class="table table-hover table-bordered">\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th>\n\t\t\t\t\t\t<paper-button raised class="">Select All</paper-button>\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tItem Name\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tCustomer\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tDue Date\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tDays Overdue\n\t\t\t\t\t</th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\t\t\t<tbody>\n')
+        __M_writer('\t<div class="table-responsive">\n\t\t<table class="table table-hover table-bordered">\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th>\n\t\t\t\t\t\t\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tItem Name\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tCustomer\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tDue Date\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tDays Overdue\n\t\t\t\t\t</th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\t\t\t<tbody>\n')
         for item in thirty:
             __M_writer('\t\t\t\t\t<tr>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<paper-checkbox></paper-checkbox>\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t')
             __M_writer(str( item.item.specs.name ))
@@ -80,8 +80,7 @@ def render_view_table(context,**pageargs):
             __M_writer(str( item.transaction.customer.get_full_name() ))
             __M_writer('\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t')
             __M_writer(str( item.due_date.strftime('%b %d, %Y') ))
-            __M_writer('\n\t\t\t\t\t\t</td>\n\t\t\t\t\t</tr>\n')
-        __M_writer('\t\t\t</tbody>\n\t\t</table>\t\n\t\t\t\t<table class="table table-hover table-bordered">\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th>\n\t\t\t\t\t\t<paper-button raised class="">Select All</paper-button>\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tItem Name\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tCustomer\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tDue Date\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tDays Overdue\n\t\t\t\t\t</th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\t\t\t<tbody>\n')
+            __M_writer('\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t30\n\t\t\t\t\t\t</td>\n\t\t\t\t\t</tr>\n')
         for item in sixty:
             __M_writer('\t\t\t\t\t<tr>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<paper-checkbox></paper-checkbox>\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t')
             __M_writer(str( item.item.specs.name ))
@@ -89,8 +88,7 @@ def render_view_table(context,**pageargs):
             __M_writer(str( item.transaction.customer.get_full_name() ))
             __M_writer('\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t')
             __M_writer(str( item.due_date.strftime('%b %d, %Y') ))
-            __M_writer('\n\t\t\t\t\t\t</td>\n\t\t\t\t\t</tr>\n')
-        __M_writer('\t\t\t</tbody>\n\t\t</table>\n\t\t<table class="table table-hover table-bordered">\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th>\n\t\t\t\t\t\t<paper-button raised class="">Select All</paper-button>\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tItem Name\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tCustomer\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tDue Date\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tDays Overdue\n\t\t\t\t\t</th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\t\t\t<tbody>\n')
+            __M_writer('\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t60\n\t\t\t\t\t\t</td>\n\t\t\t\t\t</tr>\n')
         for item in ninety:
             __M_writer('\t\t\t\t\t<tr>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<paper-checkbox></paper-checkbox>\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t')
             __M_writer(str( item.item.specs.name ))
@@ -98,8 +96,7 @@ def render_view_table(context,**pageargs):
             __M_writer(str( item.transaction.customer.get_full_name() ))
             __M_writer('\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t')
             __M_writer(str( item.due_date.strftime('%b %d, %Y') ))
-            __M_writer('\n\t\t\t\t\t\t</td>\n\t\t\t\t\t</tr>\n')
-        __M_writer('\t\t\t</tbody>\n\t\t</table>\n\t\t<table class="table table-hover table-bordered">\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th>\n\t\t\t\t\t\t<paper-button raised class="">Select All</paper-button>\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tItem Name\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tCustomer\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tDue Date\n\t\t\t\t\t</th>\n\t\t\t\t\t<th>\n\t\t\t\t\t\tDays Overdue\n\t\t\t\t\t</th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\t\t\t<tbody>\n')
+            __M_writer('\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t90\n\t\t\t\t\t\t</td>\n\t\t\t\t\t</tr>\n')
         for item in ninety_plus:
             __M_writer('\t\t\t\t\t<tr>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<paper-checkbox></paper-checkbox>\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t')
             __M_writer(str( item.item.specs.name ))
@@ -107,8 +104,8 @@ def render_view_table(context,**pageargs):
             __M_writer(str( item.transaction.customer.get_full_name() ))
             __M_writer('\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t')
             __M_writer(str( item.due_date.strftime('%b %d, %Y') ))
-            __M_writer('\n\t\t\t\t\t\t</td>\n\t\t\t\t\t</tr>\n')
-        __M_writer('\t\t\t</tbody>\n\t\t</table>\n\t</div>\n')
+            __M_writer('\n\t\t\t\t\t\t</td>\n\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t90+\n\t\t\t\t\t\t</td>\n\t\t\t\t\t</tr>\n')
+        __M_writer('\t\t\t</tbody>\n\t\t</table>\t\n\t</div>\n')
         __M_writer('\n')
         return ''
     finally:
@@ -147,6 +144,6 @@ def render_page_title_h1(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"133": 15, "140": 15, "141": 16, "142": 16, "148": 142, "27": 0, "43": 7, "44": 9, "49": 13, "54": 17, "64": 19, "74": 19, "75": 22, "76": 44, "77": 45, "78": 50, "79": 50, "80": 53, "81": 53, "82": 56, "83": 56, "84": 60, "85": 83, "86": 84, "87": 89, "88": 89, "89": 92, "90": 92, "91": 95, "92": 95, "93": 99, "94": 122, "95": 123, "96": 128, "97": 128, "98": 131, "99": 131, "100": 134, "101": 134, "102": 138, "103": 161, "104": 162, "105": 167, "106": 167, "107": 170, "108": 170, "109": 173, "110": 173, "111": 177, "112": 181, "118": 11, "125": 11, "126": 12, "127": 12}, "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\reports\\templates/Report.html", "source_encoding": "ascii", "uri": "Report.html"}
+{"line_map": {"130": 15, "137": 15, "138": 16, "139": 16, "145": 139, "27": 0, "43": 7, "44": 9, "49": 13, "54": 17, "64": 19, "74": 19, "75": 22, "76": 44, "77": 45, "78": 50, "79": 50, "80": 53, "81": 53, "82": 56, "83": 56, "84": 63, "85": 64, "86": 69, "87": 69, "88": 72, "89": 72, "90": 75, "91": 75, "92": 82, "93": 83, "94": 88, "95": 88, "96": 91, "97": 91, "98": 94, "99": 94, "100": 101, "101": 102, "102": 107, "103": 107, "104": 110, "105": 110, "106": 113, "107": 113, "108": 120, "109": 124, "115": 11, "122": 11, "123": 12, "124": 12}, "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\reports\\templates/Report.html", "source_encoding": "ascii", "uri": "Report.html"}
 __M_END_METADATA
 """

@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'products',
     'reports',
     'rentals',
+    'password_reset',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -70,6 +71,8 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'chef.urls'
+
+
 
 WSGI_APPLICATION = 'chef.wsgi.application'
 
@@ -101,6 +104,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+#password reset - modal_login.html
+LOGIN_URL = '/homepage/index'
+PASSWORD_RESET_TIMEOUT_DAYS=1
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/

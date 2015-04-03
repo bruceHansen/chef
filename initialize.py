@@ -73,7 +73,7 @@ address.state   = 'UT'
 address.ZIP     = '84606'
 address.save() 
 
-user = mod.User.objects.create_superuser( username='admin', email='test@fake.com', password='password' )
+user = mod.User.objects.create_superuser( username='admin', email='brucehnsn@gmail.com', password='password' )
 user.first_name= 'Admin'
 user.address   = address
 user.save()

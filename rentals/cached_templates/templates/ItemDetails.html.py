@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427844868.974997
+_modified_time = 1428031765.264724
 _enable_loop = True
 _template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/ItemDetails.html'
 _template_uri = 'ItemDetails.html'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['tab_title', 'content', 'page_title']
+_exports = ['tab_title', 'page_title', 'content']
 
 
 def _mako_get_namespace(context, name):
@@ -28,14 +28,14 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def tab_title():
             return render_tab_title(context._locals(__M_locals))
         item = context.get('item', UNDEFINED)
-        def content():
-            return render_content(context._locals(__M_locals))
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def page_title():
             return render_page_title(context._locals(__M_locals))
+        def content():
+            return render_content(context._locals(__M_locals))
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\n\n')
@@ -68,15 +68,32 @@ def render_tab_title(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_page_title(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def page_title():
+            return render_page_title(context)
+        item = context.get('item', UNDEFINED)
+        __M_writer = context.writer()
+        __M_writer('\n\t\t<div class="row">\n\t\t\t\n')
+        __M_writer('\t\t\t<div class="col-md-8">\n\t\t\t\t<h1>')
+        __M_writer(str( item.specs.name ))
+        __M_writer('</h1>\n\t\t\t</div>\n')
+        __M_writer('\n\t\t</div>\n\t')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        def content():
-            return render_content(context)
-        item = context.get('item', UNDEFINED)
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def page_title():
             return render_page_title(context)
+        item = context.get('item', UNDEFINED)
+        def content():
+            return render_content(context)
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\t')
@@ -124,25 +141,8 @@ def render_content(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_page_title(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        item = context.get('item', UNDEFINED)
-        def page_title():
-            return render_page_title(context)
-        __M_writer = context.writer()
-        __M_writer('\n\t\t<div class="row">\n\t\t\t\n')
-        __M_writer('\t\t\t<div class="col-md-8">\n\t\t\t\t<h1>')
-        __M_writer(str( item.specs.name ))
-        __M_writer('</h1>\n\t\t\t</div>\n')
-        __M_writer('\n\t\t</div>\n\t')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 """
 __M_BEGIN_METADATA
-{"filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/ItemDetails.html", "source_encoding": "ascii", "uri": "ItemDetails.html", "line_map": {"134": 18, "135": 22, "136": 23, "137": 23, "138": 26, "144": 138, "27": 0, "40": 7, "41": 9, "46": 13, "56": 11, "63": 11, "64": 12, "65": 12, "71": 15, "81": 15, "82": 18, "87": 28, "88": 30, "89": 32, "90": 35, "91": 38, "92": 38, "93": 38, "94": 38, "95": 40, "96": 44, "97": 46, "98": 49, "99": 50, "100": 50, "101": 53, "102": 57, "103": 58, "104": 58, "105": 61, "106": 65, "107": 66, "108": 66, "109": 69, "110": 71, "111": 78, "112": 81, "113": 84, "114": 84, "115": 87, "116": 90, "117": 92, "118": 96, "119": 99, "120": 102, "121": 106, "127": 18}}
+{"uri": "ItemDetails.html", "line_map": {"128": 78, "129": 81, "130": 84, "131": 84, "132": 87, "133": 90, "134": 92, "135": 96, "136": 99, "137": 102, "138": 106, "144": 138, "27": 0, "40": 7, "41": 9, "46": 13, "56": 11, "63": 11, "64": 12, "65": 12, "71": 18, "78": 18, "79": 22, "80": 23, "81": 23, "82": 26, "88": 15, "98": 15, "99": 18, "104": 28, "105": 30, "106": 32, "107": 35, "108": 38, "109": 38, "110": 38, "111": 38, "112": 40, "113": 44, "114": 46, "115": 49, "116": 50, "117": 50, "118": 53, "119": 57, "120": 58, "121": 58, "122": 61, "123": 65, "124": 66, "125": 66, "126": 69, "127": 71}, "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/ItemDetails.html", "source_encoding": "ascii"}
 __M_END_METADATA
 """

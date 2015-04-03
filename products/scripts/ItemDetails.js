@@ -29,6 +29,7 @@ $(function()
 				data        :
 				{
 					id      : id,
+					rental  : false, 
 					quantity: quantity,
 				}
 			},

@@ -41,7 +41,7 @@ class LoginForm(CustomForm):
 	def clean(self):
 
 		# Check to see if self is valid
-		if self.is_valid():
+		#if self.is_valid():
 
 
 
@@ -49,10 +49,10 @@ class LoginForm(CustomForm):
 			#log user in
 
 			# See if username and password combo is correct
-			user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+			#user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
 
-			if user is None:
-				raise forms.ValidationError("Incorrect Username and/or Password")
+			#if user is None:
+			#	raise forms.ValidationError("Incorrect Username and/or Password")
 
 		return self.cleaned_data
 
@@ -116,7 +116,8 @@ def process_request(request):
 
 		if form.is_valid():
 
-			# validate against active directory
+			#
+			 validate against active directory
 			#s = Server('byuldap.byu.edu', port=389, get_info=GET_ALL_INFO)
 			#c = Connection(s, auto_bind = true, client_strategy = STRATEGY_SYNC,
 			#user='cn=pearl18,ou=people,o-ces', password='idahorocks18', authentication=AUTH_SIMPLE)

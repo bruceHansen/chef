@@ -79,3 +79,6 @@ def overdue(request):
 
 	return templater.render_to_response(request, 'Report.html', params)
 
+##########################################################################################
+################### Batch Process to send emails to rentals overdue ######################
+##########################################################################################

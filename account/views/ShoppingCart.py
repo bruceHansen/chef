@@ -186,7 +186,7 @@ class PaymentForm(CustomForm):
 	security_code = forms.IntegerField(required=True)
 	exp_month = forms.CharField(required=True, max_length=2)
 	exp_year = forms.CharField(required=True, max_length=4)
-	card_company = forms.CharField(max_length=100)
+	card_company = forms.CharField(required=True, max_length=100)
 
 	def clean(self):
 
@@ -265,23 +265,37 @@ def add(request):
 	# Define the view bag
 	params = {}
 
+	# Grab the item according to the data passed in the GET
+	pid = request.REQUEST.get('id')
+	rental = request.REQUEST.get('rental')
+	quantity = int(request.REQUEST.get('quantity'))
+
 	# Create the shopping cart if it already hasn't been
 	if 'cart' not in request.session:
 		request.session['cart'] = {}
 
-	# Grab the item according to the data passed in the GET
-	pid = request.REQUEST.get('id')
-	quantity = int(request.REQUEST.get('quantity'))
 
+   # if rental:
+    	#pass
+
+    #else:
+	
+
+	#if rental:
+	#	time = request.REQUEST.get('rental_time')	
+
+	#	request.session['cart'][pid] = time
+
+
+	#else:
 	if pid in request.session['cart']:
 		request.session['cart'][pid] += quantity
+
 	else:
 		request.session['cart'][pid] = quantity
 
 	# Make sure the session variable recognizes the change
 	request.session.modified = True
-
-
 
 	return HttpResponseRedirect('/account/ShoppingCart/')
 
@@ -443,7 +457,7 @@ def confirmation(request):
 			#make rental line item
 			ri = hmod.RentalItem()
 			ri.date_out = datetime.date.today()
-			ri.due_date = datetime.date.today() + timedelta(days=request.session['cart'][pid])
+			ri.due_date = datetime.date.today() + timedelta(days=30)
 			ri.amount = inv.standard_rental_price * request.session['cart'][pid]
 			ri.item = inv
 			ri.transaction = transaction

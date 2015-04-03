@@ -35,10 +35,13 @@
 					<th>
 						Due Date
 					</th>
+					<th>
+						Days Overdue
+					</th>
 				</tr>
 			</thead>
 			<tbody>
-				%for item in items:
+				%for item in thirty:
 					<tr>
 						<td>
 							<paper-checkbox></paper-checkbox>
@@ -56,6 +59,123 @@
 				%endfor
 			</tbody>
 		</table>	
+				<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>
+						<paper-button raised class="">Select All</paper-button>
+					</th>
+					<th>
+						Item Name
+					</th>
+					<th>
+						Customer
+					</th>
+					<th>
+						Due Date
+					</th>
+					<th>
+						Days Overdue
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				%for item in sixty:
+					<tr>
+						<td>
+							<paper-checkbox></paper-checkbox>
+						</td>
+						<td>
+							${ item.item.specs.name }
+						</td>
+						<td>
+							${ item.transaction.customer.get_full_name() }
+						</td>
+						<td>
+							${ item.due_date.strftime('%b %d, %Y') }
+						</td>
+					</tr>
+				%endfor
+			</tbody>
+		</table>
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>
+						<paper-button raised class="">Select All</paper-button>
+					</th>
+					<th>
+						Item Name
+					</th>
+					<th>
+						Customer
+					</th>
+					<th>
+						Due Date
+					</th>
+					<th>
+						Days Overdue
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				%for item in ninety:
+					<tr>
+						<td>
+							<paper-checkbox></paper-checkbox>
+						</td>
+						<td>
+							${ item.item.specs.name }
+						</td>
+						<td>
+							${ item.transaction.customer.get_full_name() }
+						</td>
+						<td>
+							${ item.due_date.strftime('%b %d, %Y') }
+						</td>
+					</tr>
+				%endfor
+			</tbody>
+		</table>
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>
+						<paper-button raised class="">Select All</paper-button>
+					</th>
+					<th>
+						Item Name
+					</th>
+					<th>
+						Customer
+					</th>
+					<th>
+						Due Date
+					</th>
+					<th>
+						Days Overdue
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				%for item in ninety_plus:
+					<tr>
+						<td>
+							<paper-checkbox></paper-checkbox>
+						</td>
+						<td>
+							${ item.item.specs.name }
+						</td>
+						<td>
+							${ item.transaction.customer.get_full_name() }
+						</td>
+						<td>
+							${ item.due_date.strftime('%b %d, %Y') }
+						</td>
+					</tr>
+				%endfor
+			</tbody>
+		</table>
 	</div>
 	## END TABLE OF ITEMS ##
 

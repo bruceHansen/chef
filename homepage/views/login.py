@@ -25,6 +25,7 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 
 
+
 templater = get_renderer('homepage')
 
 ##########################################################################################
@@ -32,38 +33,51 @@ templater = get_renderer('homepage')
 ##########################################################################################
 
 class LoginForm(CustomForm):
-
-	''' Class for the login form '''
 	
 	username = forms.CharField(required=True, max_length=100)
 	password = forms.CharField(required=True, label="Password", widget=forms.PasswordInput)
 
 	def clean(self):
-
+		''' Class for the login form '''
+		
 		# Check to see if self is valid
 		if self.is_valid():
 
 			user_name=self.cleaned_data['username']
 			pass_word=self.cleaned_data['password']
 
-			#s = Server('colonialheritagefoundation.info', port=389, get_info=GET_ALL_INFO)
-			#c = Connection(s, auto_bind = true, client_strategy = STRATEGY_SYNC,
-			#user='cn=pearl18,ou=people,o-ces', password='idahorocks18', authentication=AUTH_SIMPLE)
+			s = Server('colonialheritagefoundation.info', port=400, get_info=GET_ALL_INFO)
+		
+			try:
+				c = Connection(s, auto_bind = True, client_strategy = STRATEGY_SYNC, user=user_name+'@colonialheritagefoundation.local', password=pass_word, authentication=AUTH_SIMPLE)
+			except:
+				c = None
+			print('hello connection', c)
+			if c is not None:
+				try:	
+					u = hmod.User.objects.get(username=user_name)
+				except hmod.User.DoesNotExist:
+					u = hmod.User()	
+					u.first_name = user_name
+					u.last_name = ''
+					u.phone = ''
+					u.username = user_name
+					u.set_password(pass_word)
+				
+					u.save()
 
-			#if c is not None :
-			#	u = amod.User.objects.get_or_create(username=form.cleaned_data['username'])
-				#u.first_name = 
-				#u.last_name = 
-				#u.email
-				#u.set_password()
-				#u.save()
+				try:
+					admins = hmod.Group.objects.get(name='Administrator')
+				except hmod.Group.DoesNotExist:
+					print('Administrator Group Non Existent')
+
+				admins.user_set.add(u)
 
 			#log user in
-
 			# See if username and password combo is correct
-			user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+			a_user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
 
-			if user is None:
+			if a_user is None:
 				raise forms.ValidationError("Incorrect Username and/or Password")
 
 		return self.cleaned_data
@@ -128,7 +142,6 @@ def process_request(request):
 
 		if form.is_valid():
 
-
 			## Authenticate again
 			user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
 			
@@ -147,12 +160,9 @@ def process_request(request):
 
 	params['form'] = form
 
-
-
-	# If the user was brought here from the front-page login button, return the ajax form
-	# If not, send user to the main login page. 
+	#check if user is brought from modal or main login form
 	if form.modal:
-		return templater.render_to_response(request, 'modal_login.html', params)
+		return templater.render_to_response(request,'modal_login.html', params)
 	else:
 		return templater.render_to_response(request, 'login.html', params)
 

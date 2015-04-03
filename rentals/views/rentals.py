@@ -153,16 +153,20 @@ def rental_return(request):
 	params={}
 
 	# get the transactions for the active user
+	rental_items = []
 
-	transaction = hmod.Transaction.objects.filter(customer_id=request.user.id)
+	r_items = hmod.RentalItem.objects.all().filter(date_in=None)
+	print(r_items)
 
-	for tran in transaction:
-		# Grab the items without a date_in and where the customer is the current user
-		r_items = hmod.RentalItem.objects.filter(transaction_id=tran.id).filter(date_in=None)
+	for r_item in r_items:
+		if r_item.transaction.customer == request.user:
+			rental_items.append(r_item)
+			print(rental_items)
 
-		params['r_items'] = r_items
+	params['rented_items'] = rental_items
 
-	return templater.render_to_response(request, 'rental_return.html', params)	
+	return templater.render_to_response(request, 'rental_return.html', params)
+
 
 ##########################################################################################
 ################################## RETURN Specific ITEMS ###################################

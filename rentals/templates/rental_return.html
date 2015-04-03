@@ -13,7 +13,10 @@
 </%block>
 
 <%block name="content">
-	
+	<div class="item_box">
+	%if len(rented_items) == 0:
+		<p>You have no active rentals.</p>
+	%else:
 	
 		<table class="table table-hover table-bordered">
 			<thead>
@@ -34,19 +37,19 @@
 			</thead>
 
 			<tbody>
-				%for r_item in r_items:
+				%for item in rented_items:
 				<tr>
 					<td>
-						${ r_item.item.specs.name }
+						${ item.item.specs.name }
 					</td>
 					<td>
-						${ r_item.due_date }
+						${ item.due_date }
 					</td>
 					<td>
-						<img id="image_field" src="${ STATIC_URL }${ r_item.item.specs.photograph.image }" >
+						<img id="image_field" src="${ STATIC_URL }${ item.item.specs.photograph.image }" >
 					</td>
 					<td>
-						<a class="button" href="/rentals/rentals.item_return/${ r_item.item_id }/${ r_item.id }">
+						<a class="button" href="/rentals/rentals.item_return/${ item.item_id }/${ item.id }">
 							<paper-button raised class="edit_button">Return</paper-button>
 						</a>
 					</td>
@@ -56,6 +59,7 @@
 			
 		</table>
 
-
+	%endif
+	</div>
 
 </%block>

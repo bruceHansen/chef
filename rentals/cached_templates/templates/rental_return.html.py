@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428034366.707738
+_modified_time = 1428097372.061656
 _enable_loop = True
 _template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rental_return.html'
 _template_uri = 'rental_return.html'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['content', 'tab_title']
+_exports = ['tab_title', 'content']
 
 
 def _mako_get_namespace(context, name):
@@ -28,12 +28,13 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        r_items = context.get('r_items', UNDEFINED)
-        def content():
-            return render_content(context._locals(__M_locals))
+        rented_items = context.get('rented_items', UNDEFINED)
+        len = context.get('len', UNDEFINED)
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def tab_title():
             return render_tab_title(context._locals(__M_locals))
+        def content():
+            return render_content(context._locals(__M_locals))
         __M_writer = context.writer()
         __M_writer('\r\n\r\n')
         __M_writer('\r\n\r\n')
@@ -51,34 +52,6 @@ def render_body(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_content(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        r_items = context.get('r_items', UNDEFINED)
-        def content():
-            return render_content(context)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
-        __M_writer = context.writer()
-        __M_writer('\r\n\t\r\n\t\r\n\t\t<table class="table table-hover table-bordered">\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\tName\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\tDue Date\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\tImage\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\tActions\r\n\t\t\t\t\t</th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\r\n\t\t\t<tbody>\r\n')
-        for r_item in r_items:
-            __M_writer('\t\t\t\t<tr>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t')
-            __M_writer(str( r_item.item.specs.name ))
-            __M_writer('\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t')
-            __M_writer(str( r_item.due_date ))
-            __M_writer('\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<img id="image_field" src="')
-            __M_writer(str( STATIC_URL ))
-            __M_writer(str( r_item.item.specs.photograph.image ))
-            __M_writer('" >\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<a class="button" href="/rentals/rentals.item_return/')
-            __M_writer(str( r_item.item_id ))
-            __M_writer('/')
-            __M_writer(str( r_item.id ))
-            __M_writer('">\r\n\t\t\t\t\t\t\t<paper-button raised class="edit_button">Return</paper-button>\r\n\t\t\t\t\t\t</a>\r\n\t\t\t\t\t</td>\r\n')
-        __M_writer('\t\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\t\t\t\r\n\t\t</table>\r\n\r\n\r\n\r\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 def render_tab_title(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
@@ -91,8 +64,42 @@ def render_tab_title(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_content(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        rented_items = context.get('rented_items', UNDEFINED)
+        len = context.get('len', UNDEFINED)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        def content():
+            return render_content(context)
+        __M_writer = context.writer()
+        __M_writer('\r\n\t<div class="item_box">\r\n')
+        if len(rented_items) == 0:
+            __M_writer('\t\t<p>You have no active rentals.</p>\r\n')
+        else:
+            __M_writer('\t\r\n\t\t<table class="table table-hover table-bordered">\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\tName\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\tDue Date\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\tImage\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\tActions\r\n\t\t\t\t\t</th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\r\n\t\t\t<tbody>\r\n')
+            for item in rented_items:
+                __M_writer('\t\t\t\t<tr>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t')
+                __M_writer(str( item.item.specs.name ))
+                __M_writer('\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t')
+                __M_writer(str( item.due_date ))
+                __M_writer('\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<img id="image_field" src="')
+                __M_writer(str( STATIC_URL ))
+                __M_writer(str( item.item.specs.photograph.image ))
+                __M_writer('" >\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<a class="button" href="/rentals/rentals.item_return/')
+                __M_writer(str( item.item_id ))
+                __M_writer('/')
+                __M_writer(str( item.id ))
+                __M_writer('">\r\n\t\t\t\t\t\t\t<paper-button raised class="edit_button">Return</paper-button>\r\n\t\t\t\t\t\t</a>\r\n\t\t\t\t\t</td>\r\n')
+            __M_writer('\t\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\t\t\t\r\n\t\t</table>\r\n\r\n')
+        __M_writer('\t</div>\r\n\r\n')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 """
 __M_BEGIN_METADATA
-{"line_map": {"64": 38, "65": 40, "66": 40, "67": 43, "68": 43, "69": 46, "70": 46, "71": 46, "72": 49, "73": 49, "74": 49, "75": 49, "76": 54, "82": 11, "88": 11, "27": 0, "94": 88, "38": 7, "39": 9, "44": 13, "54": 15, "62": 15, "63": 37}, "source_encoding": "ascii", "uri": "rental_return.html", "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rental_return.html"}
+{"source_encoding": "ascii", "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rental_return.html", "uri": "rental_return.html", "line_map": {"67": 15, "76": 15, "77": 17, "78": 18, "79": 19, "80": 20, "81": 40, "82": 41, "83": 43, "84": 43, "85": 46, "86": 46, "87": 49, "88": 49, "89": 49, "90": 52, "27": 0, "92": 52, "93": 52, "94": 57, "95": 63, "91": 52, "101": 95, "39": 7, "40": 9, "45": 13, "55": 11, "61": 11}}
 __M_END_METADATA
 """

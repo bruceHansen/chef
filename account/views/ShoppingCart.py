@@ -477,8 +477,6 @@ def confirmation(request):
 		params['r_items'] = r_items
 	### end view current rentals
 
-	si = transaction.SaleItem
-
 	items = []
 	quantity = []
 

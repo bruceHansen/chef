@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427910464.028844
+_modified_time = 1428034366.707738
 _enable_loop = True
 _template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rental_return.html'
 _template_uri = 'rental_return.html'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['tab_title', 'content']
+_exports = ['content', 'tab_title']
 
 
 def _mako_get_namespace(context, name):
@@ -29,11 +29,11 @@ def render_body(context,**pageargs):
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
         r_items = context.get('r_items', UNDEFINED)
-        def tab_title():
-            return render_tab_title(context._locals(__M_locals))
         def content():
             return render_content(context._locals(__M_locals))
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        def tab_title():
+            return render_tab_title(context._locals(__M_locals))
         __M_writer = context.writer()
         __M_writer('\r\n\r\n')
         __M_writer('\r\n\r\n')
@@ -46,18 +46,6 @@ def render_body(context,**pageargs):
             context['self'].content(**pageargs)
         
 
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_tab_title(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def tab_title():
-            return render_tab_title(context)
-        __M_writer = context.writer()
-        __M_writer('\r\n  \tRental Return\r\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -91,8 +79,20 @@ def render_content(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_tab_title(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def tab_title():
+            return render_tab_title(context)
+        __M_writer = context.writer()
+        __M_writer('\r\n  \tRental Return\r\n')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 """
 __M_BEGIN_METADATA
-{"uri": "rental_return.html", "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rental_return.html", "line_map": {"66": 15, "74": 15, "75": 37, "76": 38, "77": 40, "78": 40, "79": 43, "80": 43, "81": 46, "82": 46, "83": 46, "84": 49, "85": 49, "86": 49, "87": 49, "88": 54, "27": 0, "94": 88, "38": 7, "39": 9, "44": 13, "54": 11, "60": 11}, "source_encoding": "ascii"}
+{"line_map": {"64": 38, "65": 40, "66": 40, "67": 43, "68": 43, "69": 46, "70": 46, "71": 46, "72": 49, "73": 49, "74": 49, "75": 49, "76": 54, "82": 11, "88": 11, "27": 0, "94": 88, "38": 7, "39": 9, "44": 13, "54": 15, "62": 15, "63": 37}, "source_encoding": "ascii", "uri": "rental_return.html", "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rental_return.html"}
 __M_END_METADATA
 """

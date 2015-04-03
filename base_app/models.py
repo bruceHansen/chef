@@ -177,6 +177,8 @@ class PublicEvent(models.Model):
 class Event(models.Model):
     name           = models.TextField(max_length=100)
     start_date     = models.DateTimeField()
+    related_image  = models.ImageField(null=True)
+    start_date     = models.DateTimeField(null=True)
     end_date       = models.DateTimeField()
     event_map      = models.FileField()
     venue          = models.ForeignKey(Venue)
@@ -254,6 +256,8 @@ class ProductSpecification(models.Model):
 class ExpectedSaleItem(models.Model):
     name        = models.TextField(max_length=100, null=True)
     description = models.TextField(max_length=1000, null=True)
+    low_price   = models.DecimalField(null=True, max_digits=10, decimal_places=2)
+    high_price  = models.DecimalField(null=True, max_digits=10, decimal_places=2)
     area        = models.ForeignKey(Area) 
     product     = models.ForeignKey(ProductSpecification)
     related_image = models.ImageField()

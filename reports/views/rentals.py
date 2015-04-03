@@ -82,3 +82,47 @@ def overdue(request):
 ##########################################################################################
 ################### Batch Process to send emails to rentals overdue ######################
 ##########################################################################################
+
+@view_function
+@permission_required('base_app.add_item', login_url='/homepage/login/')
+def email_overdue(request):
+	
+	# Define the view bag
+	params={}
+
+	#define now
+	now = datetime.datetime.now()
+
+	#Create variables for the days overdue
+	thirty = now - datetime.timedelta(days=30)
+	sixty = now - datetime.timedelta(days=60)
+	ninety = now - datetime.timedelta(days=90)
+
+	#grab items that are less than thirty days overdue(1-29)
+	thirty_days = hmod.RentalItem.objects.filter(due_date__range=[thirty, now], date_in=None)
+	params['thirty'] = thirty_days
+
+	for days in thirty_days:
+
+		us = hmod.Transaction.objects.filter(id=days.transaction_id)
+		print(us)
+
+	#Grab the items that are thirty to sixty days overdue(30-59)
+	sixty_days = hmod.RentalItem.objects.filter(due_date__range=[sixty, thirty], date_in=None)
+	params['sixty'] = sixty_days
+
+	#Grab the items that are sixty to ninety days overdue(60-89)
+	ninety_days = hmod.RentalItem.objects.filter(due_date__range=[ninety, sixty], date_in=None)
+	params['ninety'] = ninety_days
+
+	# Grab the items that are ninety or more days overdue (90+)
+	ninety_plus = hmod.RentalItem.objects.filter(due_date__range=['1900-01-01', ninety], date_in=None) 
+	params['ninety_plus'] = ninety_plus
+
+	items = hmod.RentalItem.objects.filter(due_date__range=['1900-01-01', timezone.now()], date_in=None)
+
+	#Grab the items that are thirty days overdue
+
+	params['report_name'] = 'Overdue Rental Items'
+
+	return templater.render_to_response(request, 'email_overdue.html', params)

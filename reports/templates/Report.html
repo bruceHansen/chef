@@ -16,8 +16,15 @@
 	<h1>${ report_name } Report</h1>
 </%block>
 
+<%block name="page_title">
+	<a href="/reports/rentals.email_overdue">
+		<paper-button class="create_button search_button" raised>Send Overdue Emails</paper-button>
+	</a>
+</%block>
+
 <%block name="view_table">
-	
+
+
 	## TABLE OF ITEMS ##
 	<div class="table-responsive">
 		<table class="table table-hover table-bordered">

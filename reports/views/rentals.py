@@ -109,9 +109,9 @@ def email_overdue(request):
         emails = []
 
         for trans in transactions:
-            items = trans.rentalitem_set.all()
+            rental_items = trans.rentalitem_set.all()
 
-            for item in items:
+            for item in rental_items:
                 if item.due_date < datetime.date.today() and item.date_in is None:
                     emails.append(item)
 

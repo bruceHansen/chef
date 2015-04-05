@@ -93,14 +93,14 @@ class EditWItemForm(EditNWItemForm):
     
     # Make sure the years are correct (start year is before end year)
 
-class LoginForm(CustomForm):
+class DamageForm(CustomForm):
 
     ''' Class for the login form '''
 
     username = forms.CharField(required=True, max_length=100)
     password = forms.CharField(required=True, label="Password", widget=forms.PasswordInput)
-    damages = forms.CharField(required=False, label="New Damages", max_length=2000)
-    damage_fee = forms.DecimalField(required=False, decimal_places=2, label="Damage Fees Total", max_value=1000000.00)
+    damages = forms.CharField(required=False, label="Damage Description", max_length=2000)
+    damage_fee = forms.DecimalField(required=False, decimal_places=2, label="Damage Fees", max_value=1000000.00)
 
     def clean(self):
 
@@ -117,12 +117,12 @@ class LoginForm(CustomForm):
                 raise forms.ValidationError("Incorrect Username and/or Password")
             else:
                 try:
-                    agentUser = hmod.User.objects.get(username=self.cleaned_data['username'])
+                    agents = hmod.User.objects.get(username=self.cleaned_data['username'])
                 except hmod.User.DoesNotExist:
                     return HttpResponseRedirect('/rentals/rentals.returns/')
 
-                if not agentUser.groups.filter(name='Administrator').exists():
-                    raise forms.ValidationError("Must have a manager or administrator accept your return.")
+                if not agents.groups.filter(name='Administrator').exists():
+                    raise forms.ValidationError("Please have a manager approve your return")
 
         return self.cleaned_data
 
@@ -213,7 +213,7 @@ def item_return(request):
 
     # Define the view bag
     params={}
-    form = LoginForm(request)
+    form = DamageForm(request)
     form.cancel_button = False
     form.delete_button = False
     form.submit_text = "Complete Return"
@@ -224,14 +224,14 @@ def item_return(request):
         return HttpResponseRedirect('/rentals/rentals.returns/')
 
     try:
-        lineItem = hmod.RentalItem.objects.get(id=request.urlparams[1])
+        l_item = hmod.RentalItem.objects.get(id=request.urlparams[1])
     except hmod.RentalItem.DoesNotExist:
         return HttpResponseRedirect('/rentals/rentals.returns/')
 
     date = hmod.RentalItem.objects.filter(due_date__range=[datetime.datetime.now(), '3000-01-01']).filter(item=item).order_by('due_date')
 
     if request.method == 'POST':
-        form = LoginForm(request, request.POST)
+        form = DamageForm(request, request.POST)
         form.cancel_button = False
         form.delete_button = False
         form.submit_text = "Complete Return"
@@ -241,30 +241,30 @@ def item_return(request):
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
 
             ## COMPLETE RETURN ##
-            lineItem.date_in = datetime.date.today()
-            lineItem.agent = user
+            l_item.date_in = datetime.date.today()
+            l_item.agent = user
 
             item.quantity_on_hand +=1
 
             ##create damage fee line item if applicable
             if len(form.cleaned_data['damages']) > 1 or Decimal(form.cleaned_data['damage_fee']) > 0:
-                damageLine = hmod.DamageFee()
-                damageLine.amount = Decimal(form.cleaned_data['damage_fee'])
-                damageLine.description = form.cleaned_data['damages']
-                damageLine.transaction = lineItem.transaction
-                damageLine.save()
+                d_fee = hmod.DamageFee()
+                d_fee.amount = Decimal(form.cleaned_data['damage_fee'])
+                d_fee.description = form.cleaned_data['damages']
+                d_fee.transaction = l_item.transaction
+                d_fee.save()
 
-            lineItem.save()
+            l_item.save()
             item.save()
 
-            return HttpResponseRedirect('/rentals/rentals.rental_return/')
+            return templater.render_to_response(request, 'items_returned.html', params)
 
     params['form'] = form
-    params['lineItem'] = lineItem
+    params['lineItem'] = l_item
     params['item'] = item
     params['date'] = date
 
-    return templater.render_to_response(request, 'returnitem.html', params)
+    return templater.render_to_response(request, 'return_item.html', params)
 
 
 

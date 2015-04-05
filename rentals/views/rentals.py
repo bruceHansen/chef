@@ -20,6 +20,8 @@ from django.utils.translation import ugettext as _
 from django_mako_plus.controller.router import get_renderer
 from django.utils import timezone
 from datetime import datetime, timedelta
+from django.contrib.auth import authenticate, login, logout
+from decimal import *
 import datetime
 
 templater = get_renderer('rentals')
@@ -90,6 +92,39 @@ class EditWItemForm(EditNWItemForm):
     ## Clean functions ##
     
     # Make sure the years are correct (start year is before end year)
+
+class LoginForm(CustomForm):
+
+    ''' Class for the login form '''
+
+    username = forms.CharField(required=True, max_length=100)
+    password = forms.CharField(required=True, label="Password", widget=forms.PasswordInput)
+    damages = forms.CharField(required=False, label="New Damages", max_length=2000)
+    damage_fee = forms.DecimalField(required=False, decimal_places=2, label="Damage Fees Total", max_value=1000000.00)
+
+    def clean(self):
+
+        # Check to see if self is valid
+        if self.is_valid():
+
+            if self.cleaned_data['damage_fee'] is None:
+                self.cleaned_data['damage_fee'] = Decimal('0')
+
+            # See if username and password combo is correct
+            user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+
+            if user is None:
+                raise forms.ValidationError("Incorrect Username and/or Password")
+            else:
+                try:
+                    agentUser = hmod.User.objects.get(username=self.cleaned_data['username'])
+                except hmod.User.DoesNotExist:
+                    return HttpResponseRedirect('/rentals/rentals.returns/')
+
+                if not agentUser.groups.filter(name='Administrator').exists():
+                    raise forms.ValidationError("Must have a manager or administrator accept your return.")
+
+        return self.cleaned_data
 
 
 ##########################################################################################
@@ -172,29 +207,65 @@ def rental_return(request):
 ################################## RETURN Specific ITEMS ###################################
 ##########################################################################################
 
+
 @view_function
-@permission_required('base_app.add_item', login_url='/homepage/login/')
 def item_return(request):
-	
-	# Define the view bag
-	params={}
 
-	try:
-		inv=hmod.Item.objects.get(id=request.urlparams[0])
-	except hmod.Item.DoesNotExist:
-		return HttpResponse('Item does not exist')
+    # Define the view bag
+    params={}
+    form = LoginForm(request)
+    form.cancel_button = False
+    form.delete_button = False
+    form.submit_text = "Complete Return"
 
-	inv.quantity_on_hand += 1
-	
-	#owner = hmod.Item.objects.filter(owner=inv.owner).delete()
+    try:
+        item = hmod.Item.objects.get(id=request.urlparams[0])
+    except hmod.Item.DoesNotExist:
+        return HttpResponseRedirect('/rentals/rentals.returns/')
 
-	ri = hmod.RentalItem.objects.get(id=request.urlparams[1])
-	ri.date_in = timezone.now()	
-	print(request.urlparams[1])
+    try:
+        lineItem = hmod.RentalItem.objects.get(id=request.urlparams[1])
+    except hmod.RentalItem.DoesNotExist:
+        return HttpResponseRedirect('/rentals/rentals.returns/')
 
-	ri.save()
+    date = hmod.RentalItem.objects.filter(due_date__range=[datetime.datetime.now(), '3000-01-01']).filter(item=item).order_by('due_date')
 
-	return HttpResponseRedirect('/rentals/rentals/')
+    if request.method == 'POST':
+        form = LoginForm(request, request.POST)
+        form.cancel_button = False
+        form.delete_button = False
+        form.submit_text = "Complete Return"
+
+        if form.is_valid():
+            ## Authenticate again
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+
+            ## COMPLETE RETURN ##
+            lineItem.date_in = datetime.date.today()
+            lineItem.agent = user
+
+            item.quantity_on_hand +=1
+
+            ##create damage fee line item if applicable
+            if len(form.cleaned_data['damages']) > 1 or Decimal(form.cleaned_data['damage_fee']) > 0:
+                damageLine = hmod.DamageFee()
+                damageLine.amount = Decimal(form.cleaned_data['damage_fee'])
+                damageLine.description = form.cleaned_data['damages']
+                damageLine.transaction = lineItem.transaction
+                damageLine.save()
+
+            lineItem.save()
+            item.save()
+
+            return HttpResponseRedirect('/rentals/rentals.rental_return/')
+
+    params['form'] = form
+    params['lineItem'] = lineItem
+    params['item'] = item
+    params['date'] = date
+
+    return templater.render_to_response(request, 'returnitem.html', params)
+
 
 
 ##########################################################################################

@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428097372.061656
+_modified_time = 1428161590.336261
 _enable_loop = True
 _template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rental_return.html'
 _template_uri = 'rental_return.html'
@@ -28,13 +28,13 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        rented_items = context.get('rented_items', UNDEFINED)
         len = context.get('len', UNDEFINED)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
-        def tab_title():
-            return render_tab_title(context._locals(__M_locals))
         def content():
             return render_content(context._locals(__M_locals))
+        def tab_title():
+            return render_tab_title(context._locals(__M_locals))
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        rented_items = context.get('rented_items', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n\r\n')
         __M_writer('\r\n\r\n')
@@ -67,11 +67,11 @@ def render_tab_title(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        rented_items = context.get('rented_items', UNDEFINED)
         len = context.get('len', UNDEFINED)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def content():
             return render_content(context)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        rented_items = context.get('rented_items', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n\t<div class="item_box">\r\n')
         if len(rented_items) == 0:
@@ -86,11 +86,13 @@ def render_content(context,**pageargs):
                 __M_writer('\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<img id="image_field" src="')
                 __M_writer(str( STATIC_URL ))
                 __M_writer(str( item.item.specs.photograph.image ))
-                __M_writer('" >\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<a class="button" href="/rentals/rentals.item_return/')
+                __M_writer('" >\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td>\t\r\n\t\t\t\t\t\t<a class="button" href="/rentals/rentals.item_return/')
                 __M_writer(str( item.item_id ))
                 __M_writer('/')
                 __M_writer(str( item.id ))
-                __M_writer('">\r\n\t\t\t\t\t\t\t<paper-button raised class="edit_button">Return</paper-button>\r\n\t\t\t\t\t\t</a>\r\n\t\t\t\t\t</td>\r\n')
+                __M_writer('">\r\n\t\t\t\t\t\t\t<paper-button raised data-id="')
+                __M_writer(str( item.id ))
+                __M_writer('" id="return" class="edit_button">Return</paper-button>\r\n\t\t\t\t\t\t</a>\r\n\t\t\t\t\t</td>\r\n')
             __M_writer('\t\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\t\t\t\r\n\t\t</table>\r\n\r\n')
         __M_writer('\t</div>\r\n\r\n')
         return ''
@@ -100,6 +102,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"source_encoding": "ascii", "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rental_return.html", "uri": "rental_return.html", "line_map": {"67": 15, "76": 15, "77": 17, "78": 18, "79": 19, "80": 20, "81": 40, "82": 41, "83": 43, "84": 43, "85": 46, "86": 46, "87": 49, "88": 49, "89": 49, "90": 52, "27": 0, "92": 52, "93": 52, "94": 57, "95": 63, "91": 52, "101": 95, "39": 7, "40": 9, "45": 13, "55": 11, "61": 11}}
+{"uri": "rental_return.html", "line_map": {"67": 15, "76": 15, "77": 17, "78": 18, "79": 19, "80": 20, "81": 40, "82": 41, "83": 43, "84": 43, "85": 46, "86": 46, "87": 49, "88": 49, "89": 49, "90": 52, "27": 0, "92": 52, "93": 52, "94": 53, "95": 53, "96": 57, "97": 63, "91": 52, "39": 7, "40": 9, "103": 97, "45": 13, "55": 11, "61": 11}, "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/rental_return.html", "source_encoding": "ascii"}
 __M_END_METADATA
 """

@@ -15,7 +15,7 @@
 <%block name="content">
 	<div class="item_box">
 	%if len(rented_items) == 0:
-		<p>You have no active rentals.</p>
+		<p>You currently have no active rentals! Thank you for your busines!</p>
 	%else:
 	
 		<table class="table table-hover table-bordered">
@@ -48,9 +48,9 @@
 					<td>
 						<img id="image_field" src="${ STATIC_URL }${ item.item.specs.photograph.image }" >
 					</td>
-					<td>
+					<td>	
 						<a class="button" href="/rentals/rentals.item_return/${ item.item_id }/${ item.id }">
-							<paper-button raised class="edit_button">Return</paper-button>
+							<paper-button raised data-id="${ item.id }" id="return" class="edit_button">Return</paper-button>
 						</a>
 					</td>
 				%endfor

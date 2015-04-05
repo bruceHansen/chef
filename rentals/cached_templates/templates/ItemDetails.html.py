@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428031765.264724
+_modified_time = 1428161267.767159
 _enable_loop = True
 _template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/ItemDetails.html'
 _template_uri = 'ItemDetails.html'
@@ -28,7 +28,6 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def tab_title():
             return render_tab_title(context._locals(__M_locals))
         item = context.get('item', UNDEFINED)
@@ -36,6 +35,7 @@ def render_body(context,**pageargs):
             return render_page_title(context._locals(__M_locals))
         def content():
             return render_content(context._locals(__M_locals))
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\n\n')
@@ -71,9 +71,9 @@ def render_tab_title(context,**pageargs):
 def render_page_title(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        item = context.get('item', UNDEFINED)
         def page_title():
             return render_page_title(context)
-        item = context.get('item', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\t\t<div class="row">\n\t\t\t\n')
         __M_writer('\t\t\t<div class="col-md-8">\n\t\t\t\t<h1>')
@@ -88,10 +88,10 @@ def render_page_title(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        item = context.get('item', UNDEFINED)
         def page_title():
             return render_page_title(context)
-        item = context.get('item', UNDEFINED)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def content():
             return render_content(context)
         __M_writer = context.writer()
@@ -143,6 +143,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"uri": "ItemDetails.html", "line_map": {"128": 78, "129": 81, "130": 84, "131": 84, "132": 87, "133": 90, "134": 92, "135": 96, "136": 99, "137": 102, "138": 106, "144": 138, "27": 0, "40": 7, "41": 9, "46": 13, "56": 11, "63": 11, "64": 12, "65": 12, "71": 18, "78": 18, "79": 22, "80": 23, "81": 23, "82": 26, "88": 15, "98": 15, "99": 18, "104": 28, "105": 30, "106": 32, "107": 35, "108": 38, "109": 38, "110": 38, "111": 38, "112": 40, "113": 44, "114": 46, "115": 49, "116": 50, "117": 50, "118": 53, "119": 57, "120": 58, "121": 58, "122": 61, "123": 65, "124": 66, "125": 66, "126": 69, "127": 71}, "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/ItemDetails.html", "source_encoding": "ascii"}
+{"line_map": {"128": 78, "129": 81, "130": 84, "131": 84, "132": 87, "133": 90, "134": 92, "135": 96, "136": 99, "137": 102, "138": 106, "144": 138, "27": 0, "40": 7, "41": 9, "46": 13, "56": 11, "63": 11, "64": 12, "65": 12, "71": 18, "78": 18, "79": 22, "80": 23, "81": 23, "82": 26, "88": 15, "98": 15, "99": 18, "104": 28, "105": 30, "106": 32, "107": 35, "108": 38, "109": 38, "110": 38, "111": 38, "112": 40, "113": 44, "114": 46, "115": 49, "116": 50, "117": 50, "118": 53, "119": 57, "120": 58, "121": 58, "122": 61, "123": 65, "124": 66, "125": 66, "126": 69, "127": 71}, "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master\\rentals\\templates/ItemDetails.html", "source_encoding": "ascii", "uri": "ItemDetails.html"}
 __M_END_METADATA
 """

@@ -48,25 +48,6 @@
 				</tr>
 			</thead>
 			<tbody>
-				%for item in thirty:
-					<tr>
-						<td>
-							<paper-checkbox></paper-checkbox>
-						</td>
-						<td>
-							${ item.item.specs.name }
-						</td>
-						<td>
-							${ item.transaction.customer.get_full_name() }
-						</td>
-						<td>
-							${ item.due_date.strftime('%b %d, %Y') }
-						</td>
-						<td>
-							30
-						</td>
-					</tr>
-				%endfor
 				%for item in sixty:
 					<tr>
 						<td>
@@ -82,7 +63,7 @@
 							${ item.due_date.strftime('%b %d, %Y') }
 						</td>
 						<td>
-							60
+							30 - 60 days overdue
 						</td>
 					</tr>
 				%endfor
@@ -101,7 +82,7 @@
 							${ item.due_date.strftime('%b %d, %Y') }
 						</td>
 						<td>
-							90
+							60 - 90 days overdue
 						</td>
 					</tr>
 				%endfor
@@ -120,7 +101,7 @@
 							${ item.due_date.strftime('%b %d, %Y') }
 						</td>
 						<td>
-							90+
+							More than 90 days overdue
 						</td>
 					</tr>
 				%endfor

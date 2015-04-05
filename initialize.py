@@ -617,6 +617,9 @@ for data in [
 	{'date_out':'2000-01-01 00:00:00', 'due_date': '2001-01-01', 'date_in':'2002-01-01 00:00:00', 'item':item, 'transaction':transaction, 'amount':20.00},
 	{'date_out':'2014-01-01 00:00:00', 'due_date': '2015-03-19', 'item':wardrobe_item, 'transaction':transaction, 'amount':20.00},
 	{'date_out':'2014-01-01 00:00:00', 'due_date': '2015-01-20', 'item':wardrobe_item, 'transaction':transaction, 'amount':20.00},
+	{'date_out':'2014-01-01 00:00:00', 'due_date': '2015-03-01', 'item':wardrobe_item, 'transaction':transaction, 'amount':20.00},
+	{'date_out':'2014-01-01 00:00:00', 'due_date': '2015-02-02', 'item':wardrobe_item, 'transaction':transaction, 'amount':20.00},
+	{'date_out':'2014-01-01 00:00:00', 'due_date': '2014-02-02', 'item':wardrobe_item, 'transaction':transaction, 'amount':20.00},
 
 ]:
 

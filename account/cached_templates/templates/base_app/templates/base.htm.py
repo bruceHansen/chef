@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427677411.616612
+_modified_time = 1428201572.046983
 _enable_loop = True
-_template_filename = 'C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master/base_app/templates/base.htm'
+_template_filename = 'C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master/base_app/templates/base.htm'
 _template_uri = '/base_app/templates/base.htm'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['content', 'extra_links', 'navbar_links', 'sidebar', 'full_width_content', 'page_title', 'meta_tags', 'footer_links', 'tab_title', 'paper_elements_import']
+_exports = ['tab_title', 'paper_elements_import', 'extra_links', 'sidebar', 'footer_links', 'full_width_content', 'page_title', 'meta_tags', 'navbar_links', 'content']
 
 
 from django_mako_plus.controller import static_files 
@@ -19,30 +19,30 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        def paper_elements_import():
-            return render_paper_elements_import(context._locals(__M_locals))
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
-        def extra_links():
-            return render_extra_links(context._locals(__M_locals))
         def sidebar():
             return render_sidebar(context._locals(__M_locals))
-        self = context.get('self', UNDEFINED)
-        def footer_links():
-            return render_footer_links(context._locals(__M_locals))
         request = context.get('request', UNDEFINED)
-        def navbar_links():
-            return render_navbar_links(context._locals(__M_locals))
-        def full_width_content():
-            return render_full_width_content(context._locals(__M_locals))
-        def page_title():
-            return render_page_title(context._locals(__M_locals))
-        def meta_tags():
-            return render_meta_tags(context._locals(__M_locals))
-        def content():
-            return render_content(context._locals(__M_locals))
         def tab_title():
             return render_tab_title(context._locals(__M_locals))
+        def page_title():
+            return render_page_title(context._locals(__M_locals))
+        def content():
+            return render_content(context._locals(__M_locals))
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        def paper_elements_import():
+            return render_paper_elements_import(context._locals(__M_locals))
+        def footer_links():
+            return render_footer_links(context._locals(__M_locals))
+        self = context.get('self', UNDEFINED)
+        def full_width_content():
+            return render_full_width_content(context._locals(__M_locals))
         perms = context.get('perms', UNDEFINED)
+        def meta_tags():
+            return render_meta_tags(context._locals(__M_locals))
+        def extra_links():
+            return render_extra_links(context._locals(__M_locals))
+        def navbar_links():
+            return render_navbar_links(context._locals(__M_locals))
         __M_writer = context.writer()
         __M_writer('\n\n')
         __M_writer('\n')
@@ -138,13 +138,30 @@ def render_body(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_content(context,**pageargs):
+def render_tab_title(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        def content():
-            return render_content(context)
+        def tab_title():
+            return render_tab_title(context)
         __M_writer = context.writer()
-        __M_writer('\n             If you are seeing this, something went wrong...\n          ')
+        __M_writer('\n        Colonial Heritage Foundation\n      ')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
+def render_paper_elements_import(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def paper_elements_import():
+            return render_paper_elements_import(context)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        __M_writer = context.writer()
+        __M_writer('\n      <link rel="import" href="')
+        __M_writer(str( STATIC_URL ))
+        __M_writer('base_app/styles/bower_components/paper-input/paper-input.html">\n      <link rel="import" href="')
+        __M_writer(str( STATIC_URL ))
+        __M_writer('base_app/styles/bower_components/paper-button/paper-button.html">\n    ')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -162,39 +179,6 @@ def render_extra_links(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_navbar_links(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def navbar_links():
-            return render_navbar_links(context)
-        request = context.get('request', UNDEFINED)
-        perms = context.get('perms', UNDEFINED)
-        __M_writer = context.writer()
-        __M_writer('\n              <ul class="nav navbar-nav navbar-right">\n')
-        if request.user.username == '':
-            __M_writer('                  <li><a href="/homepage/index/">Home</a></li>\n                  <li><a href="/homepage/about/">About</a></li>\n                  <li><a href="/homepage/terms/">Terms</a></li>\n                  <li><a href="/homepage/contact/">Contact</a></li>\n                  <li><a href="/products/products/">Products</a></li>\n                  <li><a href="/events/festival_event">Events</a></li>\n                  <li><a href="/account/NewUser/">Sign Up</a></li>\n                  <li><a id="login_link" href="#">Login</a></li>\n')
-        else:
-            __M_writer('                  <li class="dropdown">\n                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">Home</a>\n                    <ul class="dropdown-menu dropdown-menu-left" role="menu">\n                      <li><a href="/homepage/index/">Home Page</a></li>\n                      <li><a href="/homepage/about/">About</a></li>\n                      <li><a href="/homepage/terms/">Terms</a></li>\n                      <li><a href="/homepage/contact/">Contact</a></li>\n                    </ul>\n                  </li>\n                  <li><a href="/products/products/">Products</a></li>\n                  <li><a href="/rentals/rentals/">Rentals</a></li>\n                  <li><a href="/events/festival_event">Events</a></li>\n')
-            if perms['base_app']['add_inventory'] or perms['base_app']['change_inventory'] or perms['base_app']['delete_inventory']:
-                __M_writer('                    <li class="dropdown">\n                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">Inventory</a>\n                      <ul class="dropdown-menu dropdown-menu-left" role="menu">\n                        <li role="presentation" class="dropdown-header">Rentals</li>\n                        <li><a href="/inventory/items.create/1">Add Non-Wardrobe Item</a></li>\n                        <li><a href="/inventory/items.create/2">Add Wardrobe Item</a></li>\n                        <li><a href="/inventory/items/">View Items</a></li>\n                        <li><a href="/inventory/returns/">Process Return</a></li>\n                        <li class="divider"></li>\n                        <li role="presentation" class="dropdown-header">Products</li>\n                        <li><a href="/inventory/products/">View Products</a></li>\n                      </ul>\n                    </li>\n')
-            if perms['base_app']['add_event'] or perms['base_app']['change_event'] or perms['base_app']['delete_event']:
-                __M_writer('                    <li class="dropdown">\n                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">Events</a>\n                      <ul class="dropdown-menu dropdown-menu-left" role="menu">\n                        <li><a href="/events/events.create">Schedule Event</a></li>\n                        <li><a href="/events/events/">View Events</a></li>\n                        <li class="divider"></li>\n                        <li><a href="#">Event Templates</a></li>\n                        <li class="divider"></li>\n                        <li><a href="/events/venues/">Venues</a></li>\n                      </ul>\n                    </li>\n')
-            if perms['base_app']['add_user'] or perms['base_app']['change_user'] or perms['base_app']['delete_user']:
-                __M_writer('                    <li class="dropdown">\n                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">Users</a>\n                      <ul class="dropdown-menu dropdown-menu-left" role="menu">\n                        <li><a href="/users/users.create">Add User</a></li>\n                        <li><a href="/users/users/">View Users</a></li>\n')
-                if perms['auth']['add_group'] or perms['auth']['change_group'] or perms['auth']['delete_group']:
-                    __M_writer('                          <li class="divider"></li>\n                          <li><a href="/users/groups/">Groups</a></li>\n')
-                __M_writer('                      </ul>\n                    </li>\n')
-            if perms['base_app']['add_item'] or perms['base_app']['change_item'] or perms['base_app']['delete_item']:
-                __M_writer('                    <li class="dropdown">\n                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">Reports</a>\n                      <ul class="dropdown-menu dropdown-menu-left" role="menu">\n                        <li><a href="/reports/rentals.overdue">Overdue Items</a></li>\n                      </ul>\n                    </li>\n')
-            __M_writer('                  <li class="dropdown">\n                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">')
-            __M_writer(str( request.user.first_name ))
-            __M_writer('</a>\n                    <ul class="dropdown-menu dropdown-menu-left" role="menu">\n                      <li><a href="/account/MyAccount">My Account</a></li>\n                      <li><a id="cart_link" href="#">My Cart</a></li>\n                      <li><a href="/homepage/login.logout_user">Log Out</a></li>\n                    </ul> \n                  </li>                 \n')
-        __M_writer('              </ul>\n            ')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 def render_sidebar(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
@@ -207,15 +191,35 @@ def render_sidebar(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_footer_links(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def footer_links():
+            return render_footer_links(context)
+        __M_writer = context.writer()
+        __M_writer('\n\n')
+        __M_writer('          <div class="row">\n            \n')
+        __M_writer('            <div class="col-md-4">\n              <h3>Main Menu</h3>\n              <ul>\n                <li><a href="/homepage/index/">Home</a></li>\n                <li><a href="/homepage/about/">About</a></li>\n                <li><a href="/homepage/terms/">Terms</a></li>\n                <li><a href="/homepage/contact/">Contact</a></li>\n              </ul>\n            </div>\n')
+        __M_writer('\n')
+        __M_writer('            <div class="col-md-4">\n              <h3>Rentals</h3>\n              <ul>\n                <li><a href="/homepage/index/">Home</a></li>\n                <li><a href="/homepage/about/">About</a></li>\n                <li><a href="/homepage/terms/">Terms</a></li>\n                <li><a href="/homepage/contact/">Contact</a></li>\n              </ul>\n            </div>\n')
+        __M_writer('\n')
+        __M_writer('            <div class="col-md-4">\n              <h3>Shop</h3>\n              <ul>\n                <li><a href="/homepage/index/">Home</a></li>\n                <li><a href="/homepage/about/">About</a></li>\n                <li><a href="/homepage/terms/">Terms</a></li>\n                <li><a href="/homepage/contact/">Contact</a></li>\n              </ul>\n            </div>\n')
+        __M_writer('\n          </div>\n')
+        __M_writer('\n        ')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 def render_full_width_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         def full_width_content():
             return render_full_width_content(context)
-        def page_title():
-            return render_page_title(context)
         def content():
             return render_content(context)
+        def page_title():
+            return render_page_title(context)
         def sidebar():
             return render_sidebar(context)
         __M_writer = context.writer()
@@ -272,50 +276,46 @@ def render_meta_tags(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_footer_links(context,**pageargs):
+def render_navbar_links(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        def footer_links():
-            return render_footer_links(context)
+        perms = context.get('perms', UNDEFINED)
+        request = context.get('request', UNDEFINED)
+        def navbar_links():
+            return render_navbar_links(context)
         __M_writer = context.writer()
-        __M_writer('\n\n')
-        __M_writer('          <div class="row">\n            \n')
-        __M_writer('            <div class="col-md-4">\n              <h3>Main Menu</h3>\n              <ul>\n                <li><a href="/homepage/index/">Home</a></li>\n                <li><a href="/homepage/about/">About</a></li>\n                <li><a href="/homepage/terms/">Terms</a></li>\n                <li><a href="/homepage/contact/">Contact</a></li>\n              </ul>\n            </div>\n')
-        __M_writer('\n')
-        __M_writer('            <div class="col-md-4">\n              <h3>Rentals</h3>\n              <ul>\n                <li><a href="/homepage/index/">Home</a></li>\n                <li><a href="/homepage/about/">About</a></li>\n                <li><a href="/homepage/terms/">Terms</a></li>\n                <li><a href="/homepage/contact/">Contact</a></li>\n              </ul>\n            </div>\n')
-        __M_writer('\n')
-        __M_writer('            <div class="col-md-4">\n              <h3>Shop</h3>\n              <ul>\n                <li><a href="/homepage/index/">Home</a></li>\n                <li><a href="/homepage/about/">About</a></li>\n                <li><a href="/homepage/terms/">Terms</a></li>\n                <li><a href="/homepage/contact/">Contact</a></li>\n              </ul>\n            </div>\n')
-        __M_writer('\n          </div>\n')
-        __M_writer('\n        ')
+        __M_writer('\n              <ul class="nav navbar-nav navbar-right">\n')
+        if request.user.username == '':
+            __M_writer('                  <li><a href="/homepage/index/">Home</a></li>\n                  <li><a href="/homepage/about/">About</a></li>\n                  <li><a href="/homepage/terms/">Terms</a></li>\n                  <li><a href="/homepage/contact/">Contact</a></li>\n                  <li><a href="/products/products/">Products</a></li>\n                  <li><a href="/events/festival_event">Events</a></li>\n                  <li><a href="/account/NewUser/">Sign Up</a></li>\n                  <li><a id="login_link" href="#">Login</a></li>\n')
+        else:
+            __M_writer('                  <li class="dropdown">\n                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">Home</a>\n                    <ul class="dropdown-menu dropdown-menu-left" role="menu">\n                      <li><a href="/homepage/index/">Home Page</a></li>\n                      <li><a href="/homepage/about/">About</a></li>\n                      <li><a href="/homepage/terms/">Terms</a></li>\n                      <li><a href="/homepage/contact/">Contact</a></li>\n                    </ul>\n                 \n                  <li><a href="/products/products/">Products</a></li>\n                  <li><a href="/rentals/rentals/">Rentals</a></li>\n                  <li><a href="/events/festival_event">Events</a></li>\n                  </li>\n')
+            if perms['base_app']['add_inventory'] or perms['base_app']['change_inventory'] or perms['base_app']['delete_inventory']:
+                __M_writer('                    <li class="dropdown">\n                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">Inventory</a>\n                      <ul class="dropdown-menu dropdown-menu-left" role="menu">\n                        <li role="presentation" class="dropdown-header">Rentals</li>\n                        <li><a href="/inventory/items.create/1">Add Non-Wardrobe Item</a></li>\n                        <li><a href="/inventory/items.create/2">Add Wardrobe Item</a></li>\n                        <li><a href="/inventory/items/">View Items</a></li>\n                        <li><a href="/inventory/returns/">Process Return</a></li>\n                        <li class="divider"></li>\n                        <li role="presentation" class="dropdown-header">Products</li>\n                        <li><a href="/inventory/products/">View Products</a></li>\n                      </ul>\n                    </li>\n')
+            if perms['base_app']['add_event'] or perms['base_app']['change_event'] or perms['base_app']['delete_event']:
+                __M_writer('                    <li class="dropdown">\n                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">Events</a>\n                      <ul class="dropdown-menu dropdown-menu-left" role="menu">\n                        <li><a href="/events/events.create">Schedule Event</a></li>\n                        <li><a href="/events/events/">View Events</a></li>\n                        <li class="divider"></li>\n                        <li><a href="#">Event Templates</a></li>\n                        <li class="divider"></li>\n                        <li><a href="/events/venues/">Venues</a></li>\n                      </ul>\n                    </li>\n')
+            if perms['base_app']['add_user'] or perms['base_app']['change_user'] or perms['base_app']['delete_user']:
+                __M_writer('                    <li class="dropdown">\n                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">Users</a>\n                      <ul class="dropdown-menu dropdown-menu-left" role="menu">\n                        <li><a href="/users/users.create">Add User</a></li>\n                        <li><a href="/users/users/">View Users</a></li>\n')
+                if perms['auth']['add_group'] or perms['auth']['change_group'] or perms['auth']['delete_group']:
+                    __M_writer('                          <li class="divider"></li>\n                          <li><a href="/users/groups/">Groups</a></li>\n')
+                __M_writer('                      </ul>\n                    </li>\n')
+            if perms['base_app']['add_item'] or perms['base_app']['change_item'] or perms['base_app']['delete_item']:
+                __M_writer('                    <li class="dropdown">\n                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">Reports</a>\n                      <ul class="dropdown-menu dropdown-menu-left" role="menu">\n                        <li><a href="/reports/rentals.overdue">Overdue Items</a></li>\n                      </ul>\n                    </li>\n')
+            __M_writer('                  <li class="dropdown">\n                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">')
+            __M_writer(str( request.user.first_name ))
+            __M_writer('</a>\n                    <ul class="dropdown-menu dropdown-menu-left" role="menu">\n                      <li><a href="/account/MyAccount">My Account</a></li>\n                      <li><a id="cart_link" href="#">My Cart</a></li>\n                      <li><a href="/homepage/login.logout_user">Log Out</a></li>\n                    </ul> \n                  </li>                 \n')
+        __M_writer('              </ul>\n            ')
         return ''
     finally:
         context.caller_stack._pop_frame()
 
 
-def render_tab_title(context,**pageargs):
+def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        def tab_title():
-            return render_tab_title(context)
+        def content():
+            return render_content(context)
         __M_writer = context.writer()
-        __M_writer('\n        Colonial Heritage Foundation\n      ')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_paper_elements_import(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def paper_elements_import():
-            return render_paper_elements_import(context)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
-        __M_writer = context.writer()
-        __M_writer('\n      <link rel="import" href="')
-        __M_writer(str( STATIC_URL ))
-        __M_writer('base_app/styles/bower_components/paper-input/paper-input.html">\n      <link rel="import" href="')
-        __M_writer(str( STATIC_URL ))
-        __M_writer('base_app/styles/bower_components/paper-button/paper-button.html">\n    ')
+        __M_writer('\n             If you are seeing this, something went wrong...\n          ')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -323,6 +323,6 @@ def render_paper_elements_import(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"uri": "/base_app/templates/base.htm", "source_encoding": "ascii", "line_map": {"257": 204, "263": 29, "324": 318, "269": 29, "16": 12, "18": 0, "275": 236, "316": 68, "281": 236, "282": 239, "283": 242, "284": 252, "285": 254, "286": 264, "287": 266, "288": 276, "289": 279, "295": 22, "301": 22, "47": 10, "48": 12, "49": 13, "307": 67, "53": 13, "54": 21, "314": 67, "59": 24, "60": 27, "61": 29, "318": 69, "66": 31, "67": 33, "68": 35, "69": 38, "70": 38, "71": 38, "72": 41, "73": 41, "74": 41, "75": 44, "76": 50, "77": 53, "78": 57, "79": 61, "80": 64, "81": 64, "82": 64, "83": 67, "88": 70, "89": 73, "94": 75, "95": 78, "96": 78, "97": 78, "98": 84, "99": 88, "100": 100, "105": 183, "106": 185, "107": 188, "108": 192, "109": 194, "110": 197, "317": 69, "115": 225, "116": 227, "117": 230, "118": 232, "119": 235, "124": 280, "125": 283, "126": 286, "127": 298, "128": 300, "129": 302, "130": 305, "131": 308, "132": 311, "133": 313, "134": 313, "135": 313, "141": 217, "147": 217, "153": 73, "159": 73, "165": 100, "173": 100, "174": 102, "175": 103, "176": 111, "177": 112, "178": 124, "179": 125, "180": 139, "181": 140, "182": 152, "183": 153, "184": 158, "185": 159, "186": 162, "187": 165, "188": 166, "189": 173, "190": 174, "191": 174, "192": 182, "198": 211, "204": 211, "210": 197, "222": 197, "223": 200, "224": 203, "229": 206, "230": 209, "231": 211, "236": 213, "237": 215, "238": 217, "243": 219, "244": 221, "245": 224, "315": 68, "251": 204}, "filename": "C:\\Users\\Bruce\\Desktop\\IS 413\\chef-masterspr3\\chef-master/base_app/templates/base.htm"}
+{"line_map": {"305": 175, "261": 205, "324": 318, "267": 29, "16": 12, "273": 29, "18": 0, "279": 100, "303": 174, "287": 100, "288": 102, "289": 103, "290": 111, "291": 112, "292": 125, "293": 126, "294": 140, "295": 141, "296": 153, "297": 154, "298": 159, "299": 160, "300": 163, "301": 166, "302": 167, "47": 10, "48": 12, "49": 13, "306": 183, "53": 13, "54": 21, "312": 218, "59": 24, "60": 27, "61": 29, "318": 218, "66": 31, "67": 33, "68": 35, "69": 38, "70": 38, "71": 38, "72": 41, "73": 41, "74": 41, "75": 44, "76": 50, "77": 53, "78": 57, "79": 61, "80": 64, "81": 64, "82": 64, "83": 67, "88": 70, "89": 73, "94": 75, "95": 78, "96": 78, "97": 78, "98": 84, "99": 88, "100": 100, "105": 184, "106": 186, "107": 189, "108": 193, "109": 195, "110": 198, "115": 226, "116": 228, "117": 231, "118": 233, "119": 236, "124": 281, "125": 284, "126": 287, "127": 299, "128": 301, "129": 303, "130": 306, "131": 309, "132": 312, "133": 314, "134": 314, "135": 314, "141": 22, "147": 22, "153": 67, "160": 67, "161": 68, "162": 68, "163": 69, "164": 69, "170": 73, "304": 175, "176": 73, "182": 212, "188": 212, "194": 237, "200": 237, "201": 240, "202": 243, "203": 253, "204": 255, "205": 265, "206": 267, "207": 277, "208": 280, "214": 198, "226": 198, "227": 201, "228": 204, "233": 207, "234": 210, "235": 212, "240": 214, "241": 216, "242": 218, "247": 220, "248": 222, "249": 225, "255": 205}, "filename": "C:\\Users\\Bruce\\Desktop\\winter semester 2015\\IS 413\\chef-masterspr3\\chef-master/base_app/templates/base.htm", "source_encoding": "ascii", "uri": "/base_app/templates/base.htm"}
 __M_END_METADATA
 """

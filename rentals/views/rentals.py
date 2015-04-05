@@ -110,7 +110,7 @@ class DamageForm(CustomForm):
             if self.cleaned_data['damage_fee'] is None:
                 self.cleaned_data['damage_fee'] = Decimal('0')
 
-            # See if username and password combo is correct
+            # See if username and password is correct
             user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
 
             if user is None:
@@ -246,7 +246,7 @@ def item_return(request):
 
             item.quantity_on_hand +=1
 
-            ##create damage fee line item if applicable
+            #create damage fee line item 
             if len(form.cleaned_data['damages']) > 1 or Decimal(form.cleaned_data['damage_fee']) > 0:
                 d_fee = hmod.DamageFee()
                 d_fee.amount = Decimal(form.cleaned_data['damage_fee'])
@@ -265,8 +265,6 @@ def item_return(request):
     params['date'] = date
 
     return templater.render_to_response(request, 'return_item.html', params)
-
-
 
 ##########################################################################################
 ##################################### SEARCH FORM ACTION #################################
